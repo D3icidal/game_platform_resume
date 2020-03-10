@@ -8,10 +8,11 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Thomas Ng",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "phaser": "^3.22.0",
     "socket.io": "^2.3.0"
   }
 }
