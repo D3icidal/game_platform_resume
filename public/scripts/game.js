@@ -48,7 +48,6 @@ game.scene.add("game", gameScene);
 
 // start title
 game.scene.start('titleScene');
-// game.scene.stop('titleScene');
 // game.scene.start('gameScene');
 
 

@@ -1,24 +1,24 @@
 export default class GameScene extends Phaser.Scene {
 
-	constructor() {
-		super({
-      key : 'gameScene'
+  constructor() {
+    super({
+      key: 'gameScene'
     });
-	}
+  }
 
-	init() {
-		console.log("gamescene init")
+  init() {
+    console.log("gamescene init")
 
-	};
+  };
 
-	preload() {
-		console.log("gamescene preload")
+  preload() {
+    console.log("gamescene preload")
     // load images
-      this.load.image('dude', 'assets/dude.png');
-	}
+    this.load.image('dude', 'assets/dude.png');
+  }
 
   create() {
-		console.log("gamescene create")
+    console.log("gamescene create")
 
 
     var self = this;
@@ -126,8 +126,8 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, bombs, hitBomb, null, this);
   }
 
-	update() {
-		console.log("gameScene update")
+  update() {
+    console.log("gameScene update")
     if (gameOver) {
       return;
     }
@@ -149,12 +149,12 @@ export default class GameScene extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
-	}
+  }
 
 
-	end() {
+  end() {
 
-	}
+  }
 
 }
 

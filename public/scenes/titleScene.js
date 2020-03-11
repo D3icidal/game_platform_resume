@@ -23,6 +23,12 @@ export default class TitleScene extends Phaser.Scene {
 		  // bg.setOrigin(0,0);
 
 		  var text = this.add.text(100,100, 'Welcome to my game!');
+			text.setInteractive({ useHandCursor: true });
+			text.on('pointerdown', () => this.clickButton());
 	}
+
+	clickButton() {
+    this.scene.switch('gameScene');
+}
 
 }
