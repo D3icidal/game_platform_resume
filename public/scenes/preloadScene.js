@@ -10,6 +10,16 @@ export default class PreloadScene extends Phaser.Scene {
 
 
   preload() {
+    this.load.image('background', 'assets/background.jpg');
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 'assets/dude.png', {
+      frameWidth: 32,
+      frameHeight: 48
+    });
+    
     this.graphics = this.add.graphics();
     this.newGraphics = this.add.graphics();
     var progressBar = new Phaser.Geom.Rectangle(200, 200, 400, 50);
@@ -25,17 +35,20 @@ export default class PreloadScene extends Phaser.Scene {
       fontSize: '32px',
       fill: '#FFF'
     });
+
+
     //fake data to demostrate preloader, load background x times
     this.load.image('background', 'assets/dude.png');
-    for (var i = 0; i < 40; i++) {
+    for (var i = 0; i < 50; i++) {
       this.load.image('background_' + i, 'assets/dude.png');
     }
     this.load.on('progress', this.updateBar, {
       newGraphics: this.newGraphics,
       loadingText: loadingText
     });
+
     this.load.on('complete', this.complete);
-    this.load.on('complete', () => this.scene.switch('titleScene') );
+    this.load.on('complete', () => this.scene.switch('titleScene'));
   }
 
 
@@ -45,6 +58,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.newGraphics.fillRectShape(new Phaser.Geom.Rectangle(205, 205, percentage * 390, 40));
 
     percentage = percentage * 100;
+
     this.loadingText.setText("Loading: " + percentage.toFixed(2) + "%");
     // console.log("P:" + percentage);
     console.log("Preloader: " + Math.round(percentage) + "% ...");
