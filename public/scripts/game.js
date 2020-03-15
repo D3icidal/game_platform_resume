@@ -1,33 +1,14 @@
 import config from '/config/config.js';
+import PreloadScene from '/scenes/preloadScene.js';
 import TitleScene from '/scenes/titleScene.js';
 import GameScene from '/scenes/gameScene.js';
 
 // Our game scene
-var gameScene = new GameScene();
+var preloadScene = new PreloadScene();
 var titleScene = new TitleScene();
+var gameScene = new GameScene();
 
-//* Game scene */
-// var config = {
-//   type: Phaser.AUTO,
-//   // parent: ‘platform-resume',
-//   width: 800,
-//   height: 600,
-//   physics: {
-//     default: 'arcade',
-//     arcade: {
-//       gravity: {
-//         y: 300,
-//         x: 0
-//       },
-//       debug: true
-//     }
-//   },
-//   scene: {
-//     // preload: preload,
-//     // create: create,
-//     // update: update
-//   }
-// };
+
 
 var player;
 var stars;
@@ -43,11 +24,13 @@ var scene = new Phaser.Scene("game");
 var game = new Phaser.Game(config);
 
 // load scenes
+game.scene.add('preloadScene', preloadScene)
 game.scene.add('titleScene', titleScene);
 game.scene.add("game", gameScene);
 
-// start title
-game.scene.start('titleScene');
+// Start preloader scene
+game.scene.start('preloadScene');
+// game.scene.start('titleScene');
 // game.scene.start('gameScene');
 
 
