@@ -9,7 +9,6 @@ var titleScene = new TitleScene();
 var gameScene = new GameScene();
 
 
-
 var player;
 var stars;
 var bombs;
@@ -74,6 +73,7 @@ function hitBomb(player, bomb) {
 
   gameOver = true;
 }
+
 
 // function addPlayer(self, playerInfo) {
 //   self.ship = self.physics.add.image(playerInfo.x, playerInfo.y, 'ship').setOrigin(0.5, 0.5).setDisplaySize(53, 40);

@@ -4,7 +4,10 @@ export default class PreloadScene extends Phaser.Scene {
     super({
       key: 'preloadScene'
     });
+
   }
+
+
 
   preload() {
     this.graphics = this.add.graphics();
@@ -22,11 +25,9 @@ export default class PreloadScene extends Phaser.Scene {
       fontSize: '32px',
       fill: '#FFF'
     });
-
-
-    //fake data to demostrate preloader, load background 20 times
+    //fake data to demostrate preloader, load background x times
     this.load.image('background', 'assets/dude.png');
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 40; i++) {
       this.load.image('background_' + i, 'assets/dude.png');
     }
     this.load.on('progress', this.updateBar, {
@@ -34,7 +35,9 @@ export default class PreloadScene extends Phaser.Scene {
       loadingText: loadingText
     });
     this.load.on('complete', this.complete);
+    this.load.on('complete', () => this.scene.switch('titleScene') );
   }
+
 
   updateBar(percentage) {
     this.newGraphics.clear();
@@ -54,6 +57,7 @@ export default class PreloadScene extends Phaser.Scene {
     } else {
       console.log("Preloader complete() called when percent at: " + percent);
     }
-
   }
+
+
 }
