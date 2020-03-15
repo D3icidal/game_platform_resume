@@ -1,3 +1,5 @@
+import config from '/config/config.js';
+
 export default class TitleScene extends Phaser.Scene {
 
   constructor() {
@@ -28,6 +30,11 @@ export default class TitleScene extends Phaser.Scene {
     text.setInteractive({
       useHandCursor: true
     });
+
+    if (config.debug == true) {
+      this.timedEvent = this.time.delayedCall(1000, this.clickButton, [], this);
+    }
+
     text.on('pointerdown', () => this.clickButton());
   }
 

@@ -1,3 +1,5 @@
+import config from '/config/config.js';
+
 export default class PreloadScene extends Phaser.Scene {
 
   constructor() {
@@ -10,6 +12,11 @@ export default class PreloadScene extends Phaser.Scene {
 
 
   preload() {
+    // console.log(this.config.arcade.debug)
+    if (config.debug == true){
+      console.log("\n\n\t\tThomas's DEBUG MODE ENABLED in config.js\n\n\n");
+    }
+
     this.load.image('background', 'assets/background.jpg');
     this.load.image('sky', 'assets/sky.png');
     this.load.image('ground', 'assets/platform.png');
@@ -19,7 +26,7 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 48
     });
-    
+
     this.graphics = this.add.graphics();
     this.newGraphics = this.add.graphics();
     var progressBar = new Phaser.Geom.Rectangle(200, 200, 400, 50);

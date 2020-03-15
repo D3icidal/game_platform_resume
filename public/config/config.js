@@ -5,6 +5,7 @@ export default {
     // parent: ‘platform-resume',
     width: 800,
     height: 600,
+    debug: true, //My own debugging features, not phasers
     physics: {
       default: 'arcade',
       arcade: {
