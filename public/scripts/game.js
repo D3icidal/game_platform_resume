@@ -11,7 +11,7 @@ var preloadScene = new PreloadScene();
 var titleScene = new TitleScene();
 var gameScene = new GameScene();
 
-
+var map;
 var player;
 var stars;
 var bombs;

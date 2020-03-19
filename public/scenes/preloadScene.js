@@ -17,9 +17,22 @@ export default class PreloadScene extends Phaser.Scene {
       console.log("\n\n\t\tThomas's DEBUG MODE ENABLED in config.js\n\n\n");
     }
 
-    this.load.image('background', 'assets/background.jpg');
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
+
+
+
+
+
+    // set bounds so the camera won't go outside the game world
+    // this.cameras.main.setBounds(0, 0, this.map.widthInPixels, map.heightInPixels);
+    // // make the camera follow the player
+    // this.cameras.main.startFollow(player);
+
+
+
+
+    // this.load.image('background', 'assets/background.jpg');
+    // this.load.image('sky', 'assets/sky.png');
+    // this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
     this.load.spritesheet('dude', 'assets/dude.png', {
@@ -27,6 +40,8 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 48
     });
 
+
+    //PRELOADER
     this.graphics = this.add.graphics();
     this.newGraphics = this.add.graphics();
     var progressBar = new Phaser.Geom.Rectangle(200, 200, 400, 50);
@@ -44,6 +59,8 @@ export default class PreloadScene extends Phaser.Scene {
     });
 
 
+
+
     //fake data to demostrate preloader, load background x times
     this.load.image('background', 'assets/dude.png');
     for (var i = 0; i < 50; i++) {
@@ -57,6 +74,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.on('complete', this.complete);
     this.load.on('complete', () => this.scene.switch('titleScene'));
   }
+
 
 
   updateBar(percentage) {

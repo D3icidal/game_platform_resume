@@ -1,3 +1,5 @@
+import config from '/config/config.js';
+
 export default class GameScene extends Phaser.Scene {
 
   constructor() {
@@ -33,13 +35,25 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     console.log("gamescene preload")
     // load images
-    this.load.image('dude', 'assets/dude.png');
+    this.load.image('dude', '../assets/dude.png');
+
+    //Tilesets
+    // this.load.atlas('player', '../assets/tilesets/actors/adventure.png', '../assets/tilesets/actors/adventure.json');
+
+    this.load.image('platformTiles', '../assets/tilesets/platform/tileset.png');
+    this.load.image('fargroundsTile', '../assets/tilesets/platform/far-grounds.png');
+    this.load.image('skyTile', '../assets/tilesets/platform/sky.png');
+    this.load.image('cloudTile', '../assets/tilesets/platform/clouds.png');
+    this.load.image('seaTile', '../assets/tilesets/platform/sea.png');
+
+    this.load.tilemapTiledJSON('platformMap', '../assets/tilesets/platform/platformMap.json');
   }
-
-
 
   create() {
     console.log("gamescene create")
+    if (config.debug == true){
+      this.add.image(50, 50, 'dude');
+    }
 
     // this.socket = io();
     // this.socket.on('currentPlayers', function(players) {
@@ -50,8 +64,29 @@ export default class GameScene extends Phaser.Scene {
     //   });
     // });
 
+    //this should be in the create area
+    const tilemap = this.add.tilemap({key: "map"});
+    // const map = this.make.tilemap('platformMap');
 
-    this.add.image(50, 50, 'dude');
+    const platformTileset = map.addTilesetImage("mainPlatformTileset", 'platformTiles');
+    // const fargrounds = map.addTilesetImage('far_Island','fargroundsTile');
+    // const clouds = map.addTilesetImage('clouds', 'cloudTile');
+    // const sky = map.addTilesetImage('sky', 'skyTile');
+    // const sea = map.addTilesetImage('sea', 'seaTile');
+
+    console.log(this.cache.tilemap.get("platformMap").data);
+    console.log(tilemap);
+
+    const platformLayer = map.createStaticLayer("MainPlatform", platformTileset, 50, 50);
+    // const skys = map.createStaticLayer("Sky", this.sky, 50, 50);
+    // const mainForeground = map.createStaticLayer('Main Foreground', this.tileset, 50, 50);
+    // const mainTileLayer = map.createStaticLayer('Main Tile Layer', this.tileset, 50, 50);
+    // const behindActor = map.createStaticLayer('Behind Actor', this.tileset, 50, 50);
+
+
+    if (config.debug == true){
+      this.add.image(50, 50, 'dude');
+    }
 
     //  A simple background for our game
     // this.add.image(400, 300, 'sky');
@@ -61,12 +96,20 @@ export default class GameScene extends Phaser.Scene {
 
     //  Here we create the ground.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    // this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+
+
+
+
+
+    // // set background color, so the sky is not black
+    // this.cameras.main.setBackgroundColor('#ccccff');
 
     //  Now var's create some ledges
-    this.platforms.create(600, 400, 'ground');
-    this.platforms.create(50, 250, 'ground');
-    this.platforms.create(750, 220, 'ground');
+    // this.platforms.create(600, 400, 'ground');
+    // this.platforms.create(50, 250, 'ground');
+    // this.platforms.create(750, 220, 'ground');
 
     // The player and its settings
     this.player = this.physics.add.sprite(100, 450, 'dude');
