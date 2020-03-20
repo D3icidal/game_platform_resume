@@ -46,6 +46,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('cloudTile', '../assets/tilesets/platform/clouds.png');
     this.load.image('seaTile', '../assets/tilesets/platform/sea.png');
 
+      // this.load.tilemapCSV('platformMap', '../assets/tilesets/platform/platformMap_MainPlatform.csv');
     this.load.tilemapTiledJSON('platformMap', '../assets/tilesets/platform/platformMap.json');
   }
 
@@ -64,20 +65,26 @@ export default class GameScene extends Phaser.Scene {
     //   });
     // });
 
-    //this should be in the create area
-    const tilemap = this.add.tilemap({key: "map"});
-    // const map = this.make.tilemap('platformMap');
+    this.map = this.add.tilemap('tileMap');
+    var tileset=this.map.addTilesetImage('tile_set');
+    this.ground=this.map.createStaticLayer('Tiles', tileset, 0, 0);
 
-    const platformTileset = map.addTilesetImage("mainPlatformTileset", 'platformTiles');
+    //this should be in the create area
+    const map = this.add.tilemap({key: "platformMap"});
+    // const map = this.add.tilemap("platformMap");
+    // const map = this.make.tilemap('platformMap');
+    console.log(map)
+
+    const platformTileset = map.addTilesetImage("MainPlatform", 'platformTiles');
     // const fargrounds = map.addTilesetImage('far_Island','fargroundsTile');
     // const clouds = map.addTilesetImage('clouds', 'cloudTile');
     // const sky = map.addTilesetImage('sky', 'skyTile');
     // const sea = map.addTilesetImage('sea', 'seaTile');
 
     console.log(this.cache.tilemap.get("platformMap").data);
-    console.log(tilemap);
+    // console.log(tilemap);
 
-    const platformLayer = map.createStaticLayer("MainPlatform", platformTileset, 50, 50);
+    const platformLayer = this.map.createStaticLayer("layer", platformTileset, 50, 50);
     // const skys = map.createStaticLayer("Sky", this.sky, 50, 50);
     // const mainForeground = map.createStaticLayer('Main Foreground', this.tileset, 50, 50);
     // const mainTileLayer = map.createStaticLayer('Main Tile Layer', this.tileset, 50, 50);

@@ -73,6 +73,9 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.load.on('complete', this.complete);
     this.load.on('complete', () => this.scene.switch('titleScene'));
+
+
+
   }
 
 
