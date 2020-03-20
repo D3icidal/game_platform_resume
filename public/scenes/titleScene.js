@@ -32,7 +32,7 @@ export default class TitleScene extends Phaser.Scene {
     });
 
     if (config.debug == true) {
-      this.timedEvent = this.time.delayedCall(1000, this.debugMapScene, [], this);
+      this.timedEvent = this.time.delayedCall(500, this.debugMapScene, [], this);
     }
 
     text.on('pointerdown', () => this.clickButton());

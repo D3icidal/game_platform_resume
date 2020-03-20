@@ -63,7 +63,7 @@ export default class PreloadScene extends Phaser.Scene {
 
     //fake data to demostrate preloader, load background x times
     this.load.image('background', 'assets/dude.png');
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 20; i++) {
       this.load.image('background_' + i, 'assets/dude.png');
     }
     this.load.on('progress', this.updateBar, {

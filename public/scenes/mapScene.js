@@ -27,31 +27,31 @@ export default class MapScene extends Phaser.Scene {
 
       // this.load.tilemapCSV('platformMap', '../assets/tilesets/platform/platformMap_MainPlatform.csv');
 
-    this.load.image('tileImageSet', 'assets/tilesets/platform/tileset.png');
+    this.load.image('tiles', '../assets/tilesets/platform/tileset.png');
 
-    this.load.tilemapTiledJSON('map', 'assets/tilesets/platform/platformMap.json');
+    this.load.tilemapTiledJSON('test', '../assets/tilesets/platform/simplifiedTest.json');
 
     //does images exist
-    console.log(this.textures.exists('tileImageSet'));
-
+    // console.log(this.textures.exists('tileImageSet'));
   }
 
 
   create() {
-    console.log("mapScene create")
-    if (config.debug == true){
-      this.add.image(100, 100, 'star');
-    }
+    console.log("mapScene create");
 
-    var map = this.make.tilemap({ key: 'map' });
-    // var map = this.add.tilemap('tilemap', 'safsafaf');
+    const map = this.make.tilemap({ key: "test" });
 
-    var tiles = map.addTilesetImage('tileImageSet', 'tiles');
+    const tileset = map.addTilesetImage("tileset", "tiles");
+
+    const platforms = map.createStaticLayer('MainLayer', tileset, 0, 200);
+    // debugger;
+
   	// var tileset = map.addTilesetImage('tileset','tiles');
 
-    var layer = map.createStaticLayer(0, tiles, 0, 0);
+    // var layer = this.map.createStaticLayer("World", tileset, 0, 0);
 
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    // this.cameras.main.setBounds(0, 0, tilemap.widthInPixels, tilemap.heightInPixels);
+    // debugger;
 
   }
 
