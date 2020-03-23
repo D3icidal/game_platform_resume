@@ -35,63 +35,56 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     console.log("gamescene preload")
     // load images
-    this.load.image('dude', '../assets/dude.png');
 
-    //Tilesets
-    // this.load.atlas('player', '../assets/tilesets/actors/adventure.png', '../assets/tilesets/actors/adventure.json');
 
-    this.load.image('platformTiles', '../assets/tilesets/platform/tileset.png');
-    this.load.image('fargroundsTile', '../assets/tilesets/platform/far-grounds.png');
-    this.load.image('skyTile', '../assets/tilesets/platform/sky.png');
-    this.load.image('cloudTile', '../assets/tilesets/platform/clouds.png');
-    this.load.image('seaTile', '../assets/tilesets/platform/sea.png');
+    this.load.image('cliffsTilesetImage', '../assets/tilesets/platform/tileset.png');
+    this.load.image('sky', '../assets/tilesets/platform/sky.png');
+    this.load.image('clouds', '../assets/tilesets/platform/clouds.png');
+    this.load.image('sea', '../assets/tilesets/platform/sea.png');
+    this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
 
-      // this.load.tilemapCSV('platformMap', '../assets/tilesets/platform/platformMap_MainPlatform.csv');
-    this.load.tilemapTiledJSON('platformMap', '../assets/tilesets/platform/platformMap.json');
+    this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
   }
 
+
   create() {
-    console.log("gamescene create")
-    if (config.debug == true){
-      this.add.image(50, 50, 'dude');
-    }
+    console.log("mapScene create");
 
-    // this.socket = io();
-    // this.socket.on('currentPlayers', function(players) {
-    //   Object.keys(players).forEach(function(id) {
-    //     if (players[id].playerId === self.socket.id) {
-    //       // addPlayer(self, players[id]);
-    //     }
-    //   });
-    // });
+    const map = this.make.tilemap({
+      key: "tiledTilemap"
+    });
 
-    this.map = this.add.tilemap('tileMap');
-    var tileset=this.map.addTilesetImage('tile_set');
-    this.ground=this.map.createStaticLayer('Tiles', tileset, 0, 0);
-
-    //this should be in the create area
-    const map = this.add.tilemap({key: "platformMap"});
-    // const map = this.add.tilemap("platformMap");
-    // const map = this.make.tilemap('platformMap');
-    console.log(map)
-
-    const platformTileset = map.addTilesetImage("MainPlatform", 'platformTiles');
-    // const fargrounds = map.addTilesetImage('far_Island','fargroundsTile');
-    // const clouds = map.addTilesetImage('clouds', 'cloudTile');
-    // const sky = map.addTilesetImage('sky', 'skyTile');
-    // const sea = map.addTilesetImage('sea', 'seaTile');
-
-    console.log(this.cache.tilemap.get("platformMap").data);
-    // console.log(tilemap);
-
-    const platformLayer = this.map.createStaticLayer("layer", platformTileset, 50, 50);
-    // const skys = map.createStaticLayer("Sky", this.sky, 50, 50);
-    // const mainForeground = map.createStaticLayer('Main Foreground', this.tileset, 50, 50);
-    // const mainTileLayer = map.createStaticLayer('Main Tile Layer', this.tileset, 50, 50);
-    // const behindActor = map.createStaticLayer('Behind Actor', this.tileset, 50, 50);
+    //    TILESETS (uses loaded images as tilesets, once per layer)
+    // map.addTilesetImage('tileset_name_in_Tiled', 'phaser_loadImage_name')
+    const skyTileset = map.addTilesetImage("sky_tileset", "sky");
+    const cloudsTileset = map.addTilesetImage("clouds_tileset", "clouds");
+    const seaTileset = map.addTilesetImage("sea_tileset", "sea");
+    const islandTileset = map.addTilesetImage("island_tileset", "island");
+    const playformMysticCliffsTileset = map.addTilesetImage("mysticcliffs_tileset", "cliffsTilesetImage");
 
 
-    if (config.debug == true){
+    //    LAYERS  - ORDER MATTERS
+    // (top code is furthest back in layers)
+    // map.createStaticLayer('LayerName_in_Tiled', phaser_Tileset_name)
+    map.createStaticLayer('Sky_Layer', skyTileset, 0, 0);
+    map.createStaticLayer('Cloud_Layer', cloudsTileset, 0, 0);
+    map.createStaticLayer('Sea_Layer', seaTileset, 0, 0);
+    map.createStaticLayer('Island_Layer', islandTileset, 0, 0);
+    map.createStaticLayer('MistCloud_Layer', cloudsTileset, 0, 0);
+
+    //foreground behind actor layer (trees decor)
+    map.createStaticLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
+
+    //main platform game layer
+    const platforms = map.createStaticLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
+
+    //overlay layer (ladders, bridges, etc) for playform
+    map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
+
+
+    //debugger;
+
+    if (config.debug == true) {
       this.add.image(50, 50, 'dude');
     }
 
