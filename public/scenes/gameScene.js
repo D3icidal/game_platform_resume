@@ -19,7 +19,7 @@ export default class GameScene extends Phaser.Scene {
 
     // var platforms;
     // var stars;
-    var player;
+    // var player;
     // var cursors;
     // var bombs;
     // var scoreText;
@@ -48,7 +48,7 @@ export default class GameScene extends Phaser.Scene {
 
     // this.load.image('player', '../assets/tilesets/actors/adventure.png');
     // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
-    this.load.atlas('player', '../assets/tilesets/actors/adventurer_V1_5.png', '../assets/tilesets/actors/adventurer_V1_5.json');
+    this.load.multiatlas('player', '../assets/tilesets/actors/adventurer_V1_5.json', '../assets/tilesets/actors');
   }
 
 
@@ -101,14 +101,36 @@ export default class GameScene extends Phaser.Scene {
 
 
     // The player and its settings
-    const player = this.physics.add.sprite(75,150,'player');
-    player.setBounce(0.1); // our player will bounce from items
-    player.setCollideWorldBounds(true); // don't go out of the map
+    this.player = this.physics.add.sprite(75, 150, 'player');
+    this.player.setBounce(0.1); // our player will bounce from items
+    this.player.setCollideWorldBounds(true); // don't go out of the map
+    this.physics.add.collider(this.player, platforms);
     // this.player = this.physics.add.sprite(200, 100, 'player');
 
     //  Player physics properties. Give the little guy a slight bounce.
     // this.player.setBounce(0.2);
     // this.player.setCollideWorldBounds(true);
+
+
+    //  Our player animations
+    // player.setFrame(0);
+    var playerIdleFramenames = this.anims.generateFrameNumbers('player', {
+      start: 0,
+      end: 1,
+      zeroPad: 2,
+      prefix: 'adventurer-idle-',
+      suffix: '.png'
+    });
+    console.log(playerIdleFramenames)
+
+    this.anims.create({
+      key: 'idle',
+      frames: playerIdleFramenames,
+      frameRate: 5,
+      repeat: -1
+    });
+    this.player.anims.play('idle')
+
 
     //  Input Events
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -165,8 +187,8 @@ export default class GameScene extends Phaser.Scene {
     // });
 
     // this.stars.children.iterate(function(child) {
-      //  Give each star a slightly different bounce
-      // child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    //  Give each star a slightly different bounce
+    // child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
     // });
 
