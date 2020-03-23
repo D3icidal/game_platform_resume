@@ -30,39 +30,55 @@ export default class MapScene extends Phaser.Scene {
 
 
 // WORKING!!!!
-    this.load.image('tiles', '../assets/tilesets/platform/tileset.png');
-    this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
-
-    this.load.tilemapTiledJSON('test', '../assets/tilesets/platform/simplifiedTest.json');
-
-
-
+    // this.load.image('tiles', '../assets/tilesets/platform/tileset.png');
+    // this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
+    //
+    // this.load.tilemapTiledJSON('test', '../assets/tilesets/platform/simplifiedTest.json');
 // end of working example for loading
 
-  // this.load.tilemapTiledJSON('test', '../assets/tilesets/platform/resumePlatform_Tiled_CSVENCODING.json');
-// resumePlatform_Tiled_CSVENCODING
 
 
+this.load.image('tiles', '../assets/tilesets/platform/tileset.png');
+this.load.image('sea', '../assets/tilesets/platform/sea.png');
+this.load.image('clouds', '../assets/tilesets/platform/clouds.png');
 
-
-    //does images exist
-    // console.log(this.textures.exists('tileImageSet'));
+this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
   }
 
 
   create() {
     console.log("mapScene create");
 
-    const map = this.make.tilemap({ key: "test" });
+    const map = this.make.tilemap({ key: "tiledTilemap" });
 
-    //ISLAND
-    const island = map.addTilesetImage("island", "island");
-    map.createStaticLayer('island', island, 0, 200);
 
-    const tileset = map.addTilesetImage("tileset", "tiles");
-    const platforms = map.createStaticLayer('MainLayer', tileset, 0, 200);
 
-    map.createStaticLayer('trees', tileset, 0, 200);
+    //clouds layer
+    const cloudsImage = map.addTilesetImage("clouds_tileset", "clouds");
+    map.createStaticLayer('Cloud_Layer', cloudsImage, 0, 0);
+
+
+
+    // Sea Layer
+    const seaTilesetImage = map.addTilesetImage("sea_tileset", "sea");
+    const sea_layer = map.createStaticLayer('Sea_Layer', seaTilesetImage, 0, 0);
+
+
+    const tileset = map.addTilesetImage("mysticcliffs_tileset", "tiles");
+    const platforms = map.createStaticLayer('MainPlatform_Layer', tileset, 0, 0);
+    map.createStaticLayer('Foreground_BehindActor_Layer', tileset, 0, 0);
+
+
+
+
+
+
+
+
+
+
+
+    // map.createStaticLayer('trees', tileset, 0, 200);
 
 
 
