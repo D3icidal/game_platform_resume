@@ -38,7 +38,7 @@ export default class MapScene extends Phaser.Scene {
 
 
 
-this.load.image('tiles', '../assets/tilesets/platform/tileset.png');
+this.load.image('cliffsTilesetImage', '../assets/tilesets/platform/tileset.png');
 this.load.image('sky', '../assets/tilesets/platform/sky.png');
 this.load.image('clouds', '../assets/tilesets/platform/clouds.png');
 this.load.image('sea', '../assets/tilesets/platform/sea.png');
@@ -53,44 +53,32 @@ this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePl
 
     const map = this.make.tilemap({ key: "tiledTilemap" });
 
-
-    //sky layer
-    const skyImage = map.addTilesetImage("sky_tileset", "sky");
-    map.createStaticLayer('Sky_Layer', skyImage, 0, 0);
-
-
-
-    //clouds layer
-    const cloudsImage = map.addTilesetImage("clouds_tileset", "clouds");
-    map.createStaticLayer('Cloud_Layer', cloudsImage, 0, 0);
+//    TILESETS (uses loaded images as tilesets, once per layer)
+// map.addTilesetImage('tileset_name_in_Tiled', 'phaser_loadImage_name')
+    const skyTileset = map.addTilesetImage("sky_tileset", "sky");
+    const cloudsTileset = map.addTilesetImage("clouds_tileset", "clouds");
+    const seaTileset = map.addTilesetImage("sea_tileset", "sea");
+    const islandTileset = map.addTilesetImage("island_tileset", "island");
+    const playformMysticCliffsTileset = map.addTilesetImage("mysticcliffs_tileset", "cliffsTilesetImage");
 
 
-
-    // Sea Layer
-    const seaTilesetImage = map.addTilesetImage("sea_tileset", "sea");
-    const sea_layer = map.createStaticLayer('Sea_Layer', seaTilesetImage, 0, 0);
-
-    //island layer
-    const islandImage = map.addTilesetImage("island_tileset", "island");
-    map.createStaticLayer('Island_Layer', islandImage, 0, 0);
-
-    //Mist forground clouds layer
-    map.createStaticLayer('MistCloud_Layer', cloudsImage, 0, 0);
-
-
-
-
-
-    const tileset = map.addTilesetImage("mysticcliffs_tileset", "tiles");
+//    LAYERS  - ORDER MATTERS
+// (top code is furthest back in layers)
+// map.createStaticLayer('LayerName_in_Tiled', phaser_Tileset_name)
+    map.createStaticLayer('Sky_Layer', skyTileset, 0, 0);
+    map.createStaticLayer('Cloud_Layer', cloudsTileset, 0, 0);
+    map.createStaticLayer('Sea_Layer', seaTileset, 0, 0);
+    map.createStaticLayer('Island_Layer', islandTileset, 0, 0);
+    map.createStaticLayer('MistCloud_Layer', cloudsTileset, 0, 0);
 
     //foreground behind actor layer (trees decor)
-    map.createStaticLayer('Foreground_BehindActor_Layer', tileset, 0, 0);
+    map.createStaticLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
-    const platforms = map.createStaticLayer('MainPlatform_Layer', tileset, 0, 0);
+    const platforms = map.createStaticLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
 
     //overlay layer (ladders, bridges, etc) for playform
-    map.createStaticLayer('MainOverlay_Layer', tileset, 0, 0);
+    map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
 
 
 
