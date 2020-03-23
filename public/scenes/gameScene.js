@@ -19,7 +19,7 @@ export default class GameScene extends Phaser.Scene {
 
     // var platforms;
     // var stars;
-    // var player;
+    var player;
     // var cursors;
     // var bombs;
     // var scoreText;
@@ -27,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
     // var hitBomb;
     // var gameOver;
   }
+  // var player;
 
   init() {
     console.log("gamescene init")
@@ -44,6 +45,10 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
 
     this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
+
+    // this.load.image('player', '../assets/tilesets/actors/adventure.png');
+    // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
+    this.load.atlas('player', '../assets/tilesets/actors/adventurer_V1_5.png', '../assets/tilesets/actors/adventurer_V1_5.json');
   }
 
 
@@ -76,30 +81,34 @@ export default class GameScene extends Phaser.Scene {
     map.createStaticLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
-    const platforms = map.createStaticLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
+    const platforms = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
+    platforms.setCollisionByExclusion([-1]);
 
     //overlay layer (ladders, bridges, etc) for playform
     map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
 
 
-    //debugger;
+    // set the boundaries of our game world
+    this.physics.world.bounds.width = platforms.width;
+    this.physics.world.bounds.height = platforms.height;
+
 
     if (config.debug == true) {
       this.add.image(50, 50, 'dude');
+      //debugger;
     }
 
-    //  A simple background for our game
-    // this.add.image(400, 300, 'sky');
-
-    //  The platforms group contains the ground and the 2 ledges we can jump on
-    this.platforms = this.physics.add.staticGroup();
-
-    //  Here we create the ground.
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    // this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
 
+    // The player and its settings
+    this.player = this.physics.add.sprite(75,150,'player')
+    player.setBounce(0.2); // our player will bounce from items
+    player.setCollideWorldBounds(true); // don't go out of the map
+    // this.player = this.physics.add.sprite(200, 100, 'player');
 
+    //  Player physics properties. Give the little guy a slight bounce.
+    // this.player.setBounce(0.2);
+    // this.player.setCollideWorldBounds(true);
 
 
 
@@ -107,16 +116,8 @@ export default class GameScene extends Phaser.Scene {
     // this.cameras.main.setBackgroundColor('#ccccff');
 
     //  Now var's create some ledges
-    // this.platforms.create(600, 400, 'ground');
-    // this.platforms.create(50, 250, 'ground');
-    // this.platforms.create(750, 220, 'ground');
+    // this.platforms.create(600, 400, 'ground'
 
-    // The player and its settings
-    this.player = this.physics.add.sprite(100, 450, 'dude');
-
-    //  Player physics properties. Give the little guy a slight bounce.
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
 
     //  Our player animations, turning, walking left and walking right.
     this.anims.create({
