@@ -5,12 +5,14 @@ export default {
   // parent: ‘platform-resume',
   width: 800,
   height: 600,
+  parent: "game-container",
+  pixelArt: true,
   debug: true, //My own debugging features, not phasers
   physics: {
     default: 'matter',
     matter: {
       gravity: {
-        y: .05,
+        y: 1,
         x: 0
       },
       debug: {

@@ -1,4 +1,5 @@
 import config from '/config/config.js';
+import Player from "../scripts/player.js";
 
 export default class GameScene extends Phaser.Scene {
 
@@ -6,7 +7,7 @@ export default class GameScene extends Phaser.Scene {
     super({
       key: 'gameScene'
     });
-    // var platforms = this.platforms;
+    // var platform = this.platform;
     // var stars = this.stars
     // var player = this.player;
     // var cursors = this.cursors;
@@ -17,7 +18,7 @@ export default class GameScene extends Phaser.Scene {
     // var gameOver = this.gameOver;
 
 
-    // var platforms;
+    // var platform;
     // var stars;
     // var player;
     // var cursors;
@@ -78,69 +79,44 @@ export default class GameScene extends Phaser.Scene {
     map.createStaticLayer('MistCloud_Layer', cloudsTileset, 0, 0);
 
     //foreground behind actor layer (trees decor)
-    map.createStaticLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
+    const behindActorLayer = map.createDynamicLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
-    const platforms = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
-    // platforms.setCollisionByExclusion([-1]);
+    const platform = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
 
     //overlay layer (ladders, bridges, etc) for playform
-    map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
-
-
-    platforms.setCollisionByProperty({ collides: true });
-    // platforms.setCollisionByProperty({ collides: true });
-
-
-    this.matter.world.convertTilemapLayer(platforms);
+    const frontOverlayLayer = map.createDynamicLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
 
 
 
+    // Set colliding tiles before converting the layer to Matter bodies
+    platform.setCollisionByExclusion(-1)
+    behindActorLayer.setCollisionByExclusion(-1)
+    frontOverlayLayer.setCollisionByExclusion(-1)
+    // platform.setCollisionByProperty({ collides: true });
+    // behindActorLayer.setCollisionByProperty({ collides: true });
+    // frontOverlayLayer.setCollisionByProperty({ collides: true });
 
+    // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We
+    // haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default
+    // rectangle body (similar to AP).
+    this.matter.world.convertTilemapLayer(platform);
+    this.matter.world.convertTilemapLayer(frontOverlayLayer);
+    this.matter.world.convertTilemapLayer(behindActorLayer);
+    // this.matter.world.add(platform)
 
     // set the boundaries of our game world
-    // this.physics.world.bounds.width = platforms.width;
-    // this.physics.world.bounds.height = platforms.height;
+    // this.physics.world.bounds.width = platform.width;
+    // this.physics.world.bounds.height = platform.height;
 
 
-    // The player and its settings
-    this.player = this.matter
-      .add.sprite(75, 100, 'player');
-    this.player.setBounce(0.2); // our player will bounce from items
+//
+//     PLAYER
+//
+    const { x, y } = map.findObject("Actor", obj => obj.name === "spawn");
+    this.player = new Player(this, x, y);
 
-    const { Body, Bodies } = Phaser.Physics.Matter.Matter; // Native Matter modules
-    var { width: orgw , height: orgh } = this.player;
-    var w = orgw/2;
-    var h = orgh;
-    const mainBody = Bodies.rectangle(0, 0, w * 0.5, h, { chamfer: { radius: 10 } });
-    this.player.sensors = {
-      top: Bodies.rectangle(0, -h * 0.5, w * 0.75, 2, { isSensor: true }),
-      left: Bodies.rectangle(-w * 0.4, 0, 2, h * 0.75, { isSensor: true }),
-      right: Bodies.rectangle(w * 0.4, 0, 2, h * 0.75, { isSensor: true }),
-      bottom: Bodies.rectangle(0, h * 0.5, w * 0.75, 2, { isSensor: true })
-    };
-    const compoundBody = Body.create({
-      parts: [mainBody, this.player.sensors.top, this.player.sensors.bottom, this.player.sensors.left, this.player.sensors.right],
-      frictionStatic: 0,
-      frictionAir: 0.02,
-      friction: 0.1
-    });
-
-    this.player
-      .setExistingBody(compoundBody)
-      .setScale(1)
-      .setFixedRotation() // Sets inertia to infinity so the player can't rotate
-      .setPosition(75, 100);
-
-
-    // this.matter.world.convertTilemapLayer(player);
-
-
-
-    //  Player physics properties. Give the little guy a slight bounce.
-    // this.player.setBounce(0.2);
-    // this.player.setCollideWorldBounds(true);
-
+    // this.matter.world.convertTilemapLayer(this.player);
 
     //  Our player animations
     // player.setFrame(0);
@@ -159,24 +135,19 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 5,
       repeat: -1
     });
-    this.player.play('idle', true)
+    this.player.sprite.anims.play('idle', true)
 
 
     //  Input Events
     // this.cursors = this.input.keyboard.createCursorKeys();
     // Track the keys
-    const { LEFT, RIGHT, UP, A, D, W } = Phaser.Input.Keyboard.KeyCodes;
-    this.leftInput = new MultiKey(scene, [LEFT, A]);
-    this.rightInput = new MultiKey(scene, [RIGHT, D]);
-    this.jumpInput = new MultiKey(scene, [UP, W]);
 
-    this.scene.events.on("update", this.update, this);
 
     // // set background color, so the sky is not black
     // this.cameras.main.setBackgroundColor('#ccccff');
 
     //  Now var's create some ledges
-    // this.platforms.create(600, 400, 'ground'
+    // this.platform.create(600, 400, 'ground'
 
 
     //  Our player animations, turning, walking left and walking right.
@@ -235,10 +206,10 @@ export default class GameScene extends Phaser.Scene {
     //   fill: '#000'
     // });
 
-    //  Collide the player and the stars with the platforms
-    // this.physics.add.collider(this.player, this.platforms);
-    // this.physics.add.collider(this.stars, this.platforms);
-    // this.physics.add.collider(this.bombs, this.platforms);
+    //  Collide the player and the stars with the platform
+    // this.physics.add.collider(this.player, this.platform);
+    // this.physics.add.collider(this.stars, this.platform);
+    // this.physics.add.collider(this.bombs, this.platform);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     // this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
@@ -246,11 +217,14 @@ export default class GameScene extends Phaser.Scene {
     // this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     if (config.debug == true) {
       console.log(playerIdleFramenames)
+      console.log("platform:")
+      console.log(platform)
       this.add.image(50, 50, 'dude');
 
-      // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
-      // it out after you've seen what the bodies look like.
+      // Visualize all the matter bodies in the world. Slows down FPS
       this.matter.world.createDebugGraphic();
+      // console.log(this.matter.world)
+      // console.log(this.matter.world)
 
 
       //debugger;
@@ -258,7 +232,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    // console.log("gameScene update");
+    console.log("gameScene update");
+// debugger;
     // if (gameOver) {
     //   return;
     // }

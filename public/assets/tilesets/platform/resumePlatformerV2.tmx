@@ -1,46 +1,520 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="3">
  <editorsettings>
   <export target="resumePlatformerV2.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="mysticcliffs_tileset" tilewidth="16" tileheight="16" tilecount="1160" columns="58">
   <image source="tileset.png" width="928" height="320"/>
-  <tile id="60">
+  <terraintypes>
+   <terrain name="testTerrain" tile="69"/>
+  </terraintypes>
+  <tile id="60" terrain=",,,0">
    <objectgroup draworder="index" id="5">
-    <object id="4" x="10" y="15" width="4" height="1"/>
-    <object id="5" x="15" y="16" width="1"/>
-    <object id="6" x="14" y="15"/>
-    <object id="7" x="15" y="15" width="1" height="1"/>
+    <object id="8" x="10" y="13" width="6" height="3"/>
    </objectgroup>
   </tile>
-  <tile id="61">
+  <tile id="61" terrain=",,0,0">
    <objectgroup draworder="index" id="6">
-    <object id="5" x="0" y="11" width="16" height="5"/>
+    <object id="6" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
    </objectgroup>
   </tile>
-  <tile id="62">
+  <tile id="62" terrain=",,0,0">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="9" width="16" height="7"/>
+    <object id="2" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
    </objectgroup>
   </tile>
-  <tile id="63">
+  <tile id="63" terrain=",,0,0">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="9" width="16" height="7"/>
+    <object id="2" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
    </objectgroup>
   </tile>
-  <tile id="64">
+  <tile id="64" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="2" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="65" terrain=",,0,0">
+   <objectgroup draworder="index" id="5">
+    <object id="9" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="66" terrain=",,0,">
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="13" width="6" height="3"/>
+   </objectgroup>
+  </tile>
+  <tile id="118" terrain=",0,,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="11" y="0" width="5" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="119" terrain="0,0,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="120" terrain="0,0,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="121" terrain="0,0,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="3" template="../../../../../../../Documents/Tiled Collision Templates/BOX 16x16.tx" x="0" y="0"/>
+   </objectgroup>
+  </tile>
+  <tile id="122" terrain="0,0,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="123" terrain="0,0,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="0" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="124" terrain="0,,0,">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-1" y="6"/>
+   </objectgroup>
+  </tile>
+  <tile id="141">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="143">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="144">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="145">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="176" terrain=",0,,"/>
+  <tile id="177" terrain="0,0,,">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="178" terrain="0,0,,"/>
+  <tile id="179" terrain="0,0,,"/>
+  <tile id="180" terrain="0,0,,"/>
+  <tile id="181" terrain="0,0,,">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="182" terrain="0,,,"/>
+  <tile id="194">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="9" y="0">
+     <polygon points="0,0 -4,3 -4,12 1,16 7,16 7,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="204">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0">
+     <polygon points="0,0 7,0 11,3 11,12 6,16 0,16"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="211">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="8">
+     <polygon points="0,0 -3,0 -7,5 -7,7 -7,8 0,8"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="212">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8">
+     <polygon points="0,0 16,0 16,8 0,8"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="213">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8">
+     <polygon points="0,0 16,0 16,8 0,8"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="214">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8">
+     <polygon points="0,0 4,0 8,5 8,8 0,8"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="235">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="21" y="-5"/>
+   </objectgroup>
+  </tile>
+  <tile id="236">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="6"/>
+   </objectgroup>
+  </tile>
+  <tile id="239">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="3" y="2"/>
+   </objectgroup>
+  </tile>
+  <tile id="252">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="21" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="272">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="9" y="0">
+     <polygon points="0,0 0,8 -4,16 -9,16 -9,-1 0,-1"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="295">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="-1"/>
+   </objectgroup>
+  </tile>
+  <tile id="310">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="20" y="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="368">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="20" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="382">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="16" y="11">
+     <polygon points="0,0 -6,5 0,5"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="383">
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="384">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="409">
+   <objectgroup draworder="index" id="2">
+    <object id="5" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="410">
+   <objectgroup draworder="index" id="2">
+    <object id="2" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="411">
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="13" width="12" height="3"/>
+   </objectgroup>
+  </tile>
+  <tile id="415">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="416">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="440">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="11">
+     <polygon points="0,0 9,-11 16,-11 16,4 0,4"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="443">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0">
+     <polygon points="0,0 5,0 15,11 15,16 0,16"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="467">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="10"/>
+   </objectgroup>
+  </tile>
+  <tile id="469">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="473">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="474">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="480">
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="0" width="15" height="15"/>
+   </objectgroup>
+  </tile>
+  <tile id="525">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12" y="0"/>
+   </objectgroup>
+  </tile>
+  <tile id="526">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="11" y="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="527">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="4" y="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="538">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="4" y="12">
+     <polygon points="0,0 0,-12 11,-12 11,1 0,1"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="640" terrain=",,,0">
+   <objectgroup draworder="index" id="2">
+    <object id="4" x="8" y="13" width="8" height="3"/>
+   </objectgroup>
+  </tile>
+  <tile id="641" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="642" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="643" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="644" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="645" terrain=",,0,0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="16" height="3"/>
+   </objectgroup>
+  </tile>
+  <tile id="647">
+   <objectgroup draworder="index" id="3">
+    <object id="3" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="648">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="650">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="651">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="652">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="654">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="655">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="657">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="658">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="660">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="662">
+   <objectgroup draworder="index" id="2">
+    <object id="2" x="0" y="15">
+     <polygon points="0,0 16,-4 16,1 0,1"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="663">
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="0" y="11" width="16" height="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="665">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="11" width="16" height="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="666">
    <objectgroup draworder="index" id="2">
     <object id="1" x="0" y="10" width="16" height="6"/>
    </objectgroup>
   </tile>
-  <tile id="65">
-   <objectgroup draworder="index" id="5">
-    <object id="8" x="0" y="11" width="16" height="5"/>
+  <tile id="670">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
    </objectgroup>
   </tile>
-  <tile id="66">
+  <tile id="671">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="11" width="8" height="5"/>
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="672">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="13" width="3" height="3"/>
+   </objectgroup>
+  </tile>
+  <tile id="675">
+   <objectgroup draworder="index" id="3">
+    <object id="3" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="676">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="678">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="679">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="681">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="682">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12" width="16" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="698" terrain=",0,,"/>
+  <tile id="699" terrain="0,0,,"/>
+  <tile id="700" terrain="0,0,,"/>
+  <tile id="701" terrain="0,0,,"/>
+  <tile id="702" terrain="0,0,,"/>
+  <tile id="703" terrain="0,0,,">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-5" y="4" width="1" height="4"/>
+   </objectgroup>
+  </tile>
+  <tile id="728">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="9" y="10"/>
+   </objectgroup>
+  </tile>
+  <tile id="730">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-1" y="9"/>
+   </objectgroup>
+  </tile>
+  <tile id="760">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="8" y="8"/>
+   </objectgroup>
+  </tile>
+  <tile id="835">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="11">
+     <polygon points="0,0 7,0 16,-3 16,6 0,6"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="836">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="8">
+     <polygon points="0,0 16,4 16,8 0,8"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="838">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="12">
+     <polygon points="0,0 3,0 9,4 0,4"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="896">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="0">
+     <polygon points="0,0 6,3 6,16 -10,16 -10,0"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="897">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="3">
+     <polygon points="0,0 16,8 16,13 0,13"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="899">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
+   </objectgroup>
+  </tile>
+  <tile id="900">
+   <objectgroup draworder="index" id="2">
+    <object id="1" template="../../../../../../../Documents/3x16 collision.tx" name="3x16" x="0" y="13"/>
    </objectgroup>
   </tile>
  </tileset>
@@ -87,6 +561,12 @@
   </data>
  </layer>
  <objectgroup id="11" name="BELOW IS BEHIND ACTOR!"/>
+ <objectgroup id="13" name="Actor">
+  <object id="1" name="spawn" x="71" y="108">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="Collisions"/>
  <layer id="1" name="MainPlatform_Layer" width="100" height="24">
   <data encoding="base64">
    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAARQAAAEYAAABGAAAARgAAAEYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAARQAAAEYAAABGAAAAgAAAAIAAAACAAAAARgAAAEYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACJAAAAigAAAIsAAACMAAAAigAAgIkAAIAAAAAAnQEAgJwBAICbAQCAmgEAgJkBAIBGAAAAgAAAALoAAAC6AAAAugAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwwAAAMQAAADFAAAAxgAAAMQAAIDDAACAAAAAANcBAIDWAQCA1QEAgNQBAIDTAQCARQAAAEYAAABEAAAARAAAAEUAAABGAAAARgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0AAAD+AAAA/wAAAAABAAD+AACA/QAAgAAAAAARAgCAEAIAgA8CAIAOAgCADQIAgEQAAABEAAAAfgAAAEQAAABFAAAARgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3AQAAOAEAADkBAAA6AQAAOAEAgDcBAIAAAAAAAAAAAAAAAAAAAAAAuAAAAH4AAAB+AAAAfgAAALgAAAB+AAAAfwAAAIAAAAC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJMAAICSAACAkAAAAJEAAACSAAAAkwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8BAOC1AQDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcQEAAHIBAABzAQAAdAEAAHIBAIBxAQCAAAAAAAAAAAAAAAAAAAAAAOQBAIC4AAAAuAAAALgAAAC4AAAAuAAAALkAAAC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADNAACAzAAAgMoAAADLAAAAzAAAAM0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADuAQDgtAEA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKsBAACsAQAArQEAAK4BAACsAQCAqwEAgAAAAAAAAAAAAAAAAAAAAAAeAgCAHQIAgLgAAAC5AAAAugAAABkCAIAYAgCAFwIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAewEAgHoBAIB5AQCAeAEAgHoBAAB7AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7QEA4LMBAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADlAQAA5gEAAOcBAADoAQAA5gEAgOUBAIAAAAAAAAAAAAAAAAAAAAAAdwAAAHgAAAB5AAAAegAAAHsAAAB8AAAAfQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALUBAIC0AQCAswEAgLIBAIC0AQAAtQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOwBAOCyAQDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALEAAACyAAAAswAAALQAAAC1AAAAtgAAALcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmgEAAJsBAACbAQAAnAEAAAAAAADvAQCA7gEAgO0BAIDsAQCA7gEAAO8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADsAQCgsgEAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADrAAAA7AAAAO0AAADuAAAA7wAAAPAAAADxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANQBAADVAQAA1QEAANYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7QEAoLMBAKA9AAAAPgAAAD8AAABAAAAAQQAAAEIAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQEAACYBAAAnAQAAKAEAACkBAAAqAQAAKwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAgAADwIAAA8CAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO4BAKC0AQCgdwAAAHgAAAB5AAAAegAAAHsAAAB8AAAAfQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF8BAABgAQAAYQEAAGIBAABjAQAAZAEAAGUBAAAAAAAAnQEAgJwBAICbAQCAmgEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADvAQCgtQEAoLEAAACyAAAAswAAALQAAAC1AAAAtgAAALcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANcBAIDWAQCA1QEAgNQBAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADrAAAA7AAAAO0AAADuAAAA7wAAAPAAAADxAAAAmgEAAJsBAACcAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARAgCAEAIAgA8CAIAOAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQEAACYBAAAnAQAAKAEAACkBAAAqAQAAKwEAANQBAADVAQAA1gEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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
