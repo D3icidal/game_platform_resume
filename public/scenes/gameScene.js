@@ -82,30 +82,60 @@ export default class GameScene extends Phaser.Scene {
 
     //main platform game layer
     const platforms = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
-    platforms.setCollisionByExclusion([-1]);
+    // platforms.setCollisionByExclusion([-1]);
 
     //overlay layer (ladders, bridges, etc) for playform
     map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
 
 
+    platforms.setCollisionByProperty({ collides: true });
+    // platforms.setCollisionByProperty({ collides: true });
+
+
+    this.matter.world.convertTilemapLayer(platforms);
+
+
+
+
+
     // set the boundaries of our game world
-    this.physics.world.bounds.width = platforms.width;
-    this.physics.world.bounds.height = platforms.height;
-
-
-    if (config.debug == true) {
-      this.add.image(50, 50, 'dude');
-      //debugger;
-    }
-
+    // this.physics.world.bounds.width = platforms.width;
+    // this.physics.world.bounds.height = platforms.height;
 
 
     // The player and its settings
-    this.player = this.physics.add.sprite(75, 100, 'player');
+    this.player = this.matter
+      .add.sprite(75, 100, 'player');
     this.player.setBounce(0.2); // our player will bounce from items
-    this.player.setCollideWorldBounds(true); // don't go out of the map
-    this.physics.add.collider(this.player, platforms);
-    // this.player = this.physics.add.sprite(200, 100, 'player');
+
+    const { Body, Bodies } = Phaser.Physics.Matter.Matter; // Native Matter modules
+    var { width: orgw , height: orgh } = this.player;
+    var w = orgw/2;
+    var h = orgh;
+    const mainBody = Bodies.rectangle(0, 0, w * 0.5, h, { chamfer: { radius: 10 } });
+    this.player.sensors = {
+      top: Bodies.rectangle(0, -h * 0.5, w * 0.75, 2, { isSensor: true }),
+      left: Bodies.rectangle(-w * 0.4, 0, 2, h * 0.75, { isSensor: true }),
+      right: Bodies.rectangle(w * 0.4, 0, 2, h * 0.75, { isSensor: true }),
+      bottom: Bodies.rectangle(0, h * 0.5, w * 0.75, 2, { isSensor: true })
+    };
+    const compoundBody = Body.create({
+      parts: [mainBody, this.player.sensors.top, this.player.sensors.bottom, this.player.sensors.left, this.player.sensors.right],
+      frictionStatic: 0,
+      frictionAir: 0.02,
+      friction: 0.1
+    });
+
+    this.player
+      .setExistingBody(compoundBody)
+      .setScale(1)
+      .setFixedRotation() // Sets inertia to infinity so the player can't rotate
+      .setPosition(75, 100);
+
+
+    // this.matter.world.convertTilemapLayer(player);
+
+
 
     //  Player physics properties. Give the little guy a slight bounce.
     // this.player.setBounce(0.2);
@@ -121,7 +151,7 @@ export default class GameScene extends Phaser.Scene {
       prefix: 'adventurer-idle-',
       // suffix: '.png'
     });
-    console.log(playerIdleFramenames)
+
 
     this.anims.create({
       key: 'idle',
@@ -133,7 +163,14 @@ export default class GameScene extends Phaser.Scene {
 
 
     //  Input Events
-    this.cursors = this.input.keyboard.createCursorKeys();
+    // this.cursors = this.input.keyboard.createCursorKeys();
+    // Track the keys
+    const { LEFT, RIGHT, UP, A, D, W } = Phaser.Input.Keyboard.KeyCodes;
+    this.leftInput = new MultiKey(scene, [LEFT, A]);
+    this.rightInput = new MultiKey(scene, [RIGHT, D]);
+    this.jumpInput = new MultiKey(scene, [UP, W]);
+
+    this.scene.events.on("update", this.update, this);
 
     // // set background color, so the sky is not black
     // this.cameras.main.setBackgroundColor('#ccccff');
@@ -207,6 +244,17 @@ export default class GameScene extends Phaser.Scene {
     // this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
     //
     // this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
+    if (config.debug == true) {
+      console.log(playerIdleFramenames)
+      this.add.image(50, 50, 'dude');
+
+      // Visualize all the matter bodies in the world. Note: this will be slow so go ahead and comment
+      // it out after you've seen what the bodies look like.
+      this.matter.world.createDebugGraphic();
+
+
+      //debugger;
+    }
   }
 
   update() {

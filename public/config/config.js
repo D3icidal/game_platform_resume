@@ -1,21 +1,24 @@
 // import 'phaser';
 
 export default {
-    type: Phaser.AUTO,
-    // parent: ‘platform-resume',
-    width: 800,
-    height: 600,
-    debug: true, //My own debugging features, not phasers
-    physics: {
-      default: 'arcade',
-      arcade: {
-        gravity: {
-          y: 300,
-          x: 0
-        },
-        debug: true
+  type: Phaser.AUTO,
+  // parent: ‘platform-resume',
+  width: 800,
+  height: 600,
+  debug: true, //My own debugging features, not phasers
+  physics: {
+    default: 'matter',
+    matter: {
+      gravity: {
+        y: .05,
+        x: 0
+      },
+      debug: {
+        showBody: true,
+        showStaticBody: true
       }
-    },
+    }
+  },
 };
 
 
@@ -36,8 +39,4 @@ export default {
 //     }
 //   },
 //   scene: {
-//     // preload: preload,
-//     // create: create,
-//     // update: update
-//   }
-// };
+//     // preload: p
