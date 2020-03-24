@@ -21,6 +21,7 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
+var cursors;
 
 // Our game scene
 var scene = new Phaser.Scene("game");

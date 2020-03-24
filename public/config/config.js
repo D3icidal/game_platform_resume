@@ -20,7 +20,7 @@ export default {
         showStaticBody: true
       }
     }
-  },
+  }
 };
 
 
