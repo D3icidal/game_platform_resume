@@ -48,7 +48,7 @@ export default class GameScene extends Phaser.Scene {
 
     // this.load.image('player', '../assets/tilesets/actors/adventure.png');
     // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
-    this.load.multiatlas('player', '../assets/tilesets/actors/adventurer_V1_5.json', '../assets/tilesets/actors');
+    this.load.atlas('player', '../assets/tilesets/actors/adventurer_sprite.png', '../assets/tilesets/actors/adventurer_sprite.json');
   }
 
 
@@ -101,8 +101,8 @@ export default class GameScene extends Phaser.Scene {
 
 
     // The player and its settings
-    this.player = this.physics.add.sprite(75, 150, 'player');
-    this.player.setBounce(0.1); // our player will bounce from items
+    this.player = this.physics.add.sprite(75, 100, 'player');
+    this.player.setBounce(0.2); // our player will bounce from items
     this.player.setCollideWorldBounds(true); // don't go out of the map
     this.physics.add.collider(this.player, platforms);
     // this.player = this.physics.add.sprite(200, 100, 'player');
@@ -114,12 +114,12 @@ export default class GameScene extends Phaser.Scene {
 
     //  Our player animations
     // player.setFrame(0);
-    var playerIdleFramenames = this.anims.generateFrameNumbers('player', {
+    var playerIdleFramenames = this.anims.generateFrameNames('player', {
       start: 0,
-      end: 1,
+      end: 3,
       zeroPad: 2,
       prefix: 'adventurer-idle-',
-      suffix: '.png'
+      // suffix: '.png'
     });
     console.log(playerIdleFramenames)
 
@@ -129,7 +129,7 @@ export default class GameScene extends Phaser.Scene {
       frameRate: 5,
       repeat: -1
     });
-    this.player.anims.play('idle')
+    this.player.play('idle', true)
 
 
     //  Input Events

@@ -5,6 +5,44 @@
  </editorsettings>
  <tileset firstgid="1" name="mysticcliffs_tileset" tilewidth="16" tileheight="16" tilecount="1160" columns="58">
   <image source="tileset.png" width="928" height="320"/>
+  <tile id="60">
+   <objectgroup draworder="index" id="5">
+    <object id="4" x="10" y="15" width="4" height="1"/>
+    <object id="5" x="15" y="16" width="1"/>
+    <object id="6" x="14" y="15"/>
+    <object id="7" x="15" y="15" width="1" height="1"/>
+   </objectgroup>
+  </tile>
+  <tile id="61">
+   <objectgroup draworder="index" id="6">
+    <object id="5" x="0" y="11" width="16" height="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="62">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="9" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="63">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="9" width="16" height="7"/>
+   </objectgroup>
+  </tile>
+  <tile id="64">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="10" width="16" height="6"/>
+   </objectgroup>
+  </tile>
+  <tile id="65">
+   <objectgroup draworder="index" id="5">
+    <object id="8" x="0" y="11" width="16" height="5"/>
+   </objectgroup>
+  </tile>
+  <tile id="66">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="11" width="8" height="5"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="1161" name="island_tileset" tilewidth="16" tileheight="16" tilecount="228" columns="38">
   <image source="far-grounds.png" width="616" height="110"/>
