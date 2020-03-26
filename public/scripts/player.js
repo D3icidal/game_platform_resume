@@ -72,6 +72,30 @@ export default class Player {
       context: this
     });
 
+
+
+    //  Our player animations
+    // player.setFrame(0);
+    var playerIdleFramenames = this.scene.anims.generateFrameNames('player', {
+      start: 0,
+      end: 3,
+      zeroPad: 2,
+      prefix: 'adventurer-idle-',
+      // suffix: '.png'
+    });
+
+
+    this.scene.anims.create({
+      key: 'idle',
+      frames: playerIdleFramenames,
+      frameRate: 5,
+      repeat: -1
+    });
+    this.sprite.anims.play('idle', true)
+
+
+
+
     // Track the keys
 
     this.cursors = this.scene.input.keyboard.createCursorKeys();

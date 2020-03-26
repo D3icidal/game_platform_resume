@@ -131,24 +131,7 @@ export default class GameScene extends Phaser.Scene {
 
     // this.matter.world.convertTilemapLayer(this.player);
 
-    //  Our player animations
-    // player.setFrame(0);
-    var playerIdleFramenames = this.anims.generateFrameNames('player', {
-      start: 0,
-      end: 3,
-      zeroPad: 2,
-      prefix: 'adventurer-idle-',
-      // suffix: '.png'
-    });
 
-
-    this.anims.create({
-      key: 'idle',
-      frames: playerIdleFramenames,
-      frameRate: 5,
-      repeat: -1
-    });
-    this.player.sprite.anims.play('idle', true)
 
 
     //  Input Events
@@ -229,7 +212,7 @@ export default class GameScene extends Phaser.Scene {
     //
     // this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     if (config.debug == true) {
-      console.log(playerIdleFramenames)
+      console.log(this.playerIdleFramenames)
       console.log("platform:")
       console.log(platform)
       this.add.image(50, 50, 'dude');
