@@ -55,22 +55,22 @@ export default class Player {
     };
 
     // Jumping is going to have a cooldown
-    this.canJump = true;
-    this.jumpCooldownTimer = null;
+    // this.canJump = true;
+    // this.jumpCooldownTimer = null;
 
     // Before matter's update, reset our record of which surfaces the player is touching.
     scene.matter.world.on("beforeupdate", this.resetTouching, this);
 
-    // scene.matterCollision.addOnCollideStart({
-    //   objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
-    //   callback: this.onSensorCollide,
-    //   context: this
-    // });
-    // scene.matterCollision.addOnCollideActive({
-    //   objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
-    //   callback: this.onSensorCollide,
-    //   context: this
-    // });
+    scene.matterCollision.addOnCollideStart({
+      objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+      callback: this.onSensorCollide,
+      context: this
+    });
+    scene.matterCollision.addOnCollideActive({
+      objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
+      callback: this.onSensorCollide,
+      context: this
+    });
 
     // Track the keys
 
@@ -102,10 +102,10 @@ export default class Player {
     this.isTouching.right = false;
     this.isTouching.ground = false;
   }
-
-  freeze() {
-    this.sprite.setStatic(true);
-  }
+  //
+  // freeze() {
+  //   this.sprite.setStatic(true);
+  // }
 
 
   update() {

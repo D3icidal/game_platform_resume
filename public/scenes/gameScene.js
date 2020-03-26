@@ -116,6 +116,19 @@ export default class GameScene extends Phaser.Scene {
     const { x, y } = map.findObject("Actor", obj => obj.name === "spawn");
     this.player = new Player(this, x, y);
 
+    // this.matterCollision.addOnCollideStart({
+    //   objectA: this.player,
+    //   callback: eventData => {
+    //     const { bodyB, gameObjectB } = eventData;
+    //     console.log("Player touched something.");
+    //     // bodyB will be the matter body that the player touched
+    //     // gameObjectB will be the game object that owns bodyB, or undefined if there's no game object
+    //   }
+    // });
+
+
+
+
     // this.matter.world.convertTilemapLayer(this.player);
 
     //  Our player animations
