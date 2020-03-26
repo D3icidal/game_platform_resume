@@ -118,19 +118,19 @@ export default class Player {
     if (this.cursors.left.isDown) // if the left arrow key is down
     {
       console.log("left key")
-      this.sprite.setVelocityY(-200); // move left
+      this.sprite.setVelocityX(-2); // move left
     } else if (this.cursors.right.isDown) // if the right arrow key is down
     {
-      this.sprite.setVelocityX(200); // move right
+      this.sprite.setVelocityX(2); // move right
     }
     if ((this.cursors.space.isDown || this.cursors.up.isDown) && this.sprite.body.onFloor()) {
       this.sprite.body.setVelocityY(-500); // jump up
     }
 
 
-    if (this.isTouching.left == true) {console.log(isTouching.left == true)};
-    if (this.isTouching.right == true) {console.log(isTouching.right == true)};
-    if (this.isTouching.ground == true) {console.log(isTouching.ground == true)};
+    // if (this.isTouching.left == true) {console.log("isTouching.left == true")};
+    // if (this.isTouching.right == true) {console.log("isTouching.right == true")};
+    // if (this.isTouching.ground == true) {console.log("isTouching.ground == true")};
 
     // Limit horizontal speed, without this the player's velocity would just keep increasing to
     // absurd speeds. We don't want to touch the vertical velocity though, so that we don't
