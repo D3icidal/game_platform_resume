@@ -127,6 +127,11 @@ export default class Player {
       this.sprite.body.setVelocityY(-500); // jump up
     }
 
+
+    if (this.isTouching.left == true) {console.log(isTouching.left == true)};
+    if (this.isTouching.right == true) {console.log(isTouching.right == true)};
+    if (this.isTouching.ground == true) {console.log(isTouching.ground == true)};
+
     // Limit horizontal speed, without this the player's velocity would just keep increasing to
     // absurd speeds. We don't want to touch the vertical velocity though, so that we don't
     // interfere with gravity.

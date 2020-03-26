@@ -1,9 +1,9 @@
 import config from '/config/config.js';
 import PreloadScene from '/scenes/preloadScene.js';
 import TitleScene from '/scenes/titleScene.js';
-import mapScene from '/scenes/mapScene.js';
+// import mapScene from '/scenes/mapScene.js';
 import GameScene from '/scenes/gameScene.js';
-import Model from './Model.js';
+// import Model from './Model.js';
 
 
 
@@ -14,14 +14,12 @@ var gameScene = new GameScene();
 
 var map;
 var player;
-var stars;
-var bombs;
 var platforms;
 var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
-var cursors;
+
 
 // Our game scene
 var scene = new Phaser.Scene("game");
@@ -32,7 +30,7 @@ var game = new Phaser.Game(config);
 // load scenes
 game.scene.add('preloadScene', preloadScene)
 game.scene.add('titleScene', titleScene);
-game.scene.add('mapScene', mapScene);
+// game.scene.add('mapScene', mapScene);
 game.scene.add("game", gameScene);
 
 // Start preloader scene
