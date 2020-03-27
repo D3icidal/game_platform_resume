@@ -151,7 +151,6 @@ export default class Player {
       start: 0,
       end: 3,
       zeroPad: 2,
-      yoyo: true,
       prefix: 'adventurer-jump-',
       // suffix: '.png'
     });
@@ -159,10 +158,11 @@ export default class Player {
     this.scene.anims.create({
       key: 'jump',
       frames: playerJumpFrameNames,
-      frameRate: 5,
-      repeat: 0
+      frameRate: 8,
+      repeat: 0,
+      yoyo: true
     });
-    this.sprite.anims.play('jump', true)
+    // this.sprite.anims.play('jump', true)
   }
 
 
@@ -217,8 +217,18 @@ export default class Player {
       this.sprite.setFlipX(false);
       this.sprite.setVelocityX(2); // move right
     }
-    if ((this.cursors.space.isDown || this.cursors.up.isDown) && isOnGround) {
-      this.sprite.setVelocityY(-5); // jump up
+
+    // Update the animation/texture based on the state of the player's state
+    if (isOnGround) {
+      if (sprite.body.velocity.x !== 0) {
+        console.log("play run anime")
+        sprite.anims.play("run", true)
+      } else if (sprite.body.velocity.y == 0) {
+        console.log("play idle anime")
+        if(this.canJump == true) sprite.anims.play("idle", true);
+      }
+    } else {
+      sprite.anims.play("jump", true)
     }
 
 
@@ -226,6 +236,7 @@ export default class Player {
     if (velocity.x > 7) sprite.setVelocityX(7);
     else if (velocity.x < -7) sprite.setVelocityX(-7);
 
+    console.log((this.canJump && isOnGround))
     if (this.cursors.up.isDown && this.canJump && isOnGround) {
       sprite.setVelocityY(-5);
       console.log("play jump anime")
@@ -234,23 +245,13 @@ export default class Player {
       // frames after a jump is initiated
       this.canJump = false;
       this.jumpCooldownTimer = this.scene.time.addEvent({
-        delay: 2000,
+        delay: 1300,
         callback: () => (this.canJump = true)
       });
     }
 
 
-    // Update the animation/texture based on the state of the player's state
-    if (isOnGround) {
-      if (sprite.body.velocity.x !== 0) {
-        console.log("play run anime")
-        sprite.anims.play("run", true)
-      } else {
-        console.log("play idle anime")
-        sprite.anims.play("idle", true)
-      }
-    } else {
-    }
+
 
     // debugger
 
