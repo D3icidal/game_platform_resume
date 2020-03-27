@@ -224,7 +224,6 @@ export default class Player {
         console.log("play run anime")
         sprite.anims.play("run", true)
       } else if (sprite.body.velocity.y == 0) {
-        console.log("play idle anime")
         if(this.canJump == true) sprite.anims.play("idle", true);
       }
     } else {
@@ -236,7 +235,7 @@ export default class Player {
     if (velocity.x > 7) sprite.setVelocityX(7);
     else if (velocity.x < -7) sprite.setVelocityX(-7);
 
-    console.log((this.canJump && isOnGround))
+    // console.log((this.canJump && isOnGround))
     if (this.cursors.up.isDown && this.canJump && isOnGround) {
       sprite.setVelocityY(-5);
       console.log("play jump anime")

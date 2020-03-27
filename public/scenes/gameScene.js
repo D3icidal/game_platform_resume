@@ -103,13 +103,11 @@ export default class GameScene extends Phaser.Scene {
     // console.log(collisionPlatformLayer)
 
     // Set colliding tiles before converting the layer to Matter bodies
-    // platformCollisionLayer.setCollisionByExclusion(-1)
     platform.setCollisionByExclusion(-1)
+    frontOverlayLayer.setCollisionByExclusion(-1)
+    // platformCollisionLayer.setCollisionByExclusion(-1)
     // behindActorLayer.setCollisionByExclusion(-1)
-    // frontOverlayLayer.setCollisionByExclusion(-1)
     // platform.setCollisionByProperty({ collides: true });
-    // behindActorLayer.setCollisionByProperty({ collides: true });
-    // frontOverlayLayer.setCollisionByProperty({ collides: true });
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(platform);
@@ -117,9 +115,6 @@ export default class GameScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(behindActorLayer);
     // this.matter.world.add(platform)
 
-    // set the boundaries of our game world
-    // this.physics.world.bounds.width = platform.width;
-    // this.physics.world.bounds.height = platform.height;
 
 
 //
@@ -150,12 +145,33 @@ export default class GameScene extends Phaser.Scene {
       //debugger;
     }
 
-    this.matter.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
-    this.cameras.main.setBounds(0, 0, this.game.config.width, this.game.config.height);
+
+    //
+    //  Configure WORLD CAMERA etc. Game and camera bounds
+    //
+
+    this.matter.world.setBounds(0, 0, platform.width, platform.height + 30);
+    this.cameras.main.setBounds(0, 0, platform.width, platform.height);
 
     // Smoothly follow the player
-    this.cameras.main.startFollow(this.player.sprite, false, 0.5, 0.5);
+    this.cameras.main.startFollow(this.player.sprite, true, 0.5, 0.5);
+
+
+    //zoom camera onto player after the game starts
+    this.scene.scene.time.addEvent({
+      delay: 200,
+      callback: () => (this.gameStartZoom())
+    });
+
   } // End of create
+
+
+  gameStartZoom(){
+    console.log("zooming onto player");
+    this.cameras.main.zoomTo(2, 3000);
+
+
+  }
 
 
 
