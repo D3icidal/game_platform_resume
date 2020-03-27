@@ -20,22 +20,22 @@ export default class Player {
     var w = orgw / 2;
     var h = orgh;
     // const { width: w, height: h } = this.sprite;
-    const mainBody = Bodies.rectangle(0, 0, w * 0.5, h, {
+    const mainBody = Bodies.rectangle(0, 8, w * 0.5, h * 0.8, {
       chamfer: {
         radius: 10
       }
     });
     this.sensors = {
-      top: Bodies.rectangle(0, -h * 0.5, w * 0.5, 2, {
+      top: Bodies.rectangle(0, -h * 0.2, w * 0.5, 2, {
         isSensor: true
       }),
-      left: Bodies.rectangle(-w * 0.4, 0, 2, h * 0.75, {
+      left: Bodies.rectangle(-w * 0.3, 4, 2, h * 0.5, {
         isSensor: true
       }),
-      right: Bodies.rectangle(w * 0.4, 0, 2, h * 0.75, {
+      right: Bodies.rectangle(w * 0.3, 4, 2, h * 0.5, {
         isSensor: true
       }),
-      bottom: Bodies.rectangle(0, h * 0.5, w * 0.25, 2, {
+      bottom: Bodies.rectangle(0, h * 0.6, w * 0.4, 4, {
         isSensor: true
       })
     };

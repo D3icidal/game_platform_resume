@@ -104,8 +104,8 @@ export default class GameScene extends Phaser.Scene {
     // Set colliding tiles before converting the layer to Matter bodies
     // platformCollisionLayer.setCollisionByExclusion(-1)
     platform.setCollisionByExclusion(-1)
-    behindActorLayer.setCollisionByExclusion(-1)
-    frontOverlayLayer.setCollisionByExclusion(-1)
+    // behindActorLayer.setCollisionByExclusion(-1)
+    // frontOverlayLayer.setCollisionByExclusion(-1)
     // platform.setCollisionByProperty({ collides: true });
     // behindActorLayer.setCollisionByProperty({ collides: true });
     // frontOverlayLayer.setCollisionByProperty({ collides: true });
