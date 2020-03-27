@@ -1,4 +1,5 @@
 import config from '/config/config.js';
+import Player from "../scripts/player.js";
 
 export default class GameScene extends Phaser.Scene {
 
@@ -6,7 +7,7 @@ export default class GameScene extends Phaser.Scene {
     super({
       key: 'gameScene'
     });
-    // var platforms = this.platforms;
+    // var platform = this.platform;
     // var stars = this.stars
     // var player = this.player;
     // var cursors = this.cursors;
@@ -17,7 +18,7 @@ export default class GameScene extends Phaser.Scene {
     // var gameOver = this.gameOver;
 
 
-    // var platforms;
+    // var platform;
     // var stars;
     // var player;
     // var cursors;
@@ -27,6 +28,7 @@ export default class GameScene extends Phaser.Scene {
     // var hitBomb;
     // var gameOver;
   }
+  // var player;
 
   init() {
     console.log("gamescene init")
@@ -44,7 +46,12 @@ export default class GameScene extends Phaser.Scene {
     this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
 
     this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
+
+    // this.load.image('player', '../assets/tilesets/actors/adventure.png');
+    // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
+    this.load.atlas('player', '../assets/tilesets/actors/adventurer_sprite.png', '../assets/tilesets/actors/adventurer_sprite.json');
   }
+
 
 
   create() {
@@ -73,193 +80,102 @@ export default class GameScene extends Phaser.Scene {
     map.createStaticLayer('MistCloud_Layer', cloudsTileset, 0, 0);
 
     //foreground behind actor layer (trees decor)
-    map.createStaticLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
+    const behindActorLayer = map.createDynamicLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
-    const platforms = map.createStaticLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
+    const platform = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
 
     //overlay layer (ladders, bridges, etc) for playform
-    map.createStaticLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
+    const frontOverlayLayer = map.createDynamicLayer('MainOverlay_Layer', playformMysticCliffsTileset, 0, 0);
+    // COLLISIONS
+    // platformCollisionLayer    Platform_Collision_Layer
+    // // debugger;
 
 
-    //debugger;
+    //
+    //    Find every object from collision object layer
+    //
+    const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {
+      console.log(platformObject);
+      // debugger;
+      ;
+    });
 
-    if (config.debug == true) {
-      this.add.image(50, 50, 'dude');
-    }
+    console.log(this.matter.world);
 
-    //  A simple background for our game
-    // this.add.image(400, 300, 'sky');
+    const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
+    // console.log(collisionPlatformLayer)
 
-    //  The platforms group contains the ground and the 2 ledges we can jump on
-    this.platforms = this.physics.add.staticGroup();
+    // Set colliding tiles before converting the layer to Matter bodies
+    // platformCollisionLayer.setCollisionByExclusion(-1)
+    platform.setCollisionByExclusion(-1)
+    behindActorLayer.setCollisionByExclusion(-1)
+    frontOverlayLayer.setCollisionByExclusion(-1)
+    // platform.setCollisionByProperty({ collides: true });
+    // behindActorLayer.setCollisionByProperty({ collides: true });
+    // frontOverlayLayer.setCollisionByProperty({ collides: true });
 
-    //  Here we create the ground.
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    // this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default rectangle body (similar to AP).
+    this.matter.world.convertTilemapLayer(platform);
+    this.matter.world.convertTilemapLayer(frontOverlayLayer);
+    this.matter.world.convertTilemapLayer(behindActorLayer);
+    // this.matter.world.add(platform)
+
+    // set the boundaries of our game world
+    // this.physics.world.bounds.width = platform.width;
+    // this.physics.world.bounds.height = platform.height;
 
 
+//
+//     PLAYER
+//
+    const { x, y } = map.findObject("Actor", obj => obj.name === "spawn");
 
+    this.player = new Player(this, x, y);
 
-
-
-    // // set background color, so the sky is not black
     // this.cameras.main.setBackgroundColor('#ccccff');
 
-    //  Now var's create some ledges
-    // this.platforms.create(600, 400, 'ground');
-    // this.platforms.create(50, 250, 'ground');
-    // this.platforms.create(750, 220, 'ground');
-
-    // The player and its settings
-    this.player = this.physics.add.sprite(100, 450, 'dude');
-
-    //  Player physics properties. Give the little guy a slight bounce.
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
-
-    //  Our player animations, turning, walking left and walking right.
-    this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('dude', {
-        start: 0,
-        end: 3
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'turn',
-      frames: [{
-        key: 'dude',
-        frame: 4
-      }],
-      frameRate: 20
-    });
-
-    this.anims.create({
-      key: 'right',
-      frames: this.anims.generateFrameNumbers('dude', {
-        start: 5,
-        end: 8
-      }),
-      frameRate: 10,
-      repeat: -1
-    });
-
-    //  Input Events
-    this.cursors = this.input.keyboard.createCursorKeys();
-
-    //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-    this.stars = this.physics.add.group({
-      key: 'star',
-      // repeat: 11,
-      repeat: 3,
-      setXY: {
-        x: 12,
-        y: 0,
-        stepX: 70
-      }
-    });
-
-    this.stars.children.iterate(function(child) {
-
-      //  Give each star a slightly different bounce
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-
-    });
-
-    this.bombs = this.physics.add.group();
-
     //  The score
-    this.scoreText = this.add.text(16, 16, 'score: 0', {
-      fontSize: '32px',
-      fill: '#000'
-    });
+    // this.scoreText = this.add.text(16, 16, 'score: 0', {
+    //   fontSize: '32px',
+    //   fill: '#000'
+    // });
 
-    //  Collide the player and the stars with the platforms
-    this.physics.add.collider(this.player, this.platforms);
-    this.physics.add.collider(this.stars, this.platforms);
-    this.physics.add.collider(this.bombs, this.platforms);
+    if (config.debug == true) {
+      console.log("platform:")
+      console.log(platform)
+      this.add.image(50, 50, 'dude');
 
-    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
+      // Visualize all the matter bodies in the world. Slows down FPS
+      this.matter.world.createDebugGraphic();
+      // console.log(this.matter.world)
+      // console.log(this.matter.world)
 
-    this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
+      //debugger;
+    }
+
+    this.matter.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
+  } // End of create
+
+
+
+  addObjectToLayer(platformObject){
+    // this.matter.world.add(platformObject);
   }
+
 
   update() {
     console.log("gameScene update");
+    //
     // if (gameOver) {
     //   return;
     // }
 
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
-
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
-
-      this.player.anims.play('right', true);
-    } else {
-      this.player.setVelocityX(0);
-
-      this.player.anims.play('turn');
-    }
-
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
-    }
+    //
+    // if (this.cursors.up.isDown && this.player.body.touching.down) {
+    //   this.player.setVelocityY(-330);
+    // }
   }
-
-
-
-  collectStar(player, star) {
-    star.disableBody(true, true);
-
-    //  Add and update the score
-    this.score += 10;
-    this.scoreText.setText('Score: ' + this.score);
-
-    if (this.stars.countActive(true) === 0) {
-      //  A new batch of stars to collect
-      this.stars.children.iterate(function(child) {
-
-        child.enableBody(true, child.x, 0, true, true);
-
-      });
-
-      var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-      this.bomb = this.bombs.create(x, 16, 'bomb');
-      this.bomb.setBounce(1);
-      this.bomb.setCollideWorldBounds(true);
-      this.bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-      this.bomb.allowGravity = false;
-
-    }
-  }
-
-  hitBomb(player, bomb) {
-    this.physics.pause();
-
-    player.setTint(0xff0000);
-
-    player.anims.play('turn');
-
-    this.gameOver = true;
-  }
-
-
-  end() {
-
-  }
-
-
-
 
 }
-
 // export default GameScene;
