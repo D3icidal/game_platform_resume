@@ -47,6 +47,31 @@ export default class Player {
       .setFixedRotation() // Sets inertia to infinity so the player can't rotate
       .setPosition(x, y);
 
+
+
+
+    //create and track player collisions
+    this.initCollisionTracking();
+
+    //create animation frames
+    this.initPlayerAnimations();
+
+
+    // Track the keys
+    this.cursors = this.scene.input.keyboard.createCursorKeys();
+
+
+    // Before matter's update, reset our record of which surfaces the player is touching.
+    scene.matter.world.on("beforeupdate", this.resetTouching, this);
+
+
+    this.scene.events.on("update", this.update, this);
+
+
+  } //end of create()
+
+
+  initCollisionTracking(){
     // Track which sensors are touching something
     this.isTouching = {
       left: false,
@@ -55,58 +80,24 @@ export default class Player {
     };
 
     // Jumping is going to have a cooldown
-    // this.canJump = true;
-    // this.jumpCooldownTimer = null;
+    this.canJump = false;
+    this.jumpCooldownTimer = null;
 
-    // Before matter's update, reset our record of which surfaces the player is touching.
-    scene.matter.world.on("beforeupdate", this.resetTouching, this);
 
-    scene.matterCollision.addOnCollideStart({
+    this.scene.matterCollision.addOnCollideStart({
       objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
       callback: this.onSensorCollide,
       context: this
     });
-    scene.matterCollision.addOnCollideActive({
+    this.scene.matterCollision.addOnCollideActive({
       objectA: [this.sensors.bottom, this.sensors.left, this.sensors.right],
       callback: this.onSensorCollide,
       context: this
     });
-
-
-
-    // //  Our player animations
-    // // player.setFrame(0);
-    // var playerIdleFramenames = this.scene.anims.generateFrameNames('player', {
-    //   start: 0,
-    //   end: 3,
-    //   zeroPad: 2,
-    //   prefix: 'adventurer-idle-',
-    //   // suffix: '.png'
-    // });
-    //
-    //
-    // this.scene.anims.create({
-    //   key: 'idle',
-    //   frames: playerIdleFramenames,
-    //   frameRate: 5,
-    //   repeat: -1
-    // });
-    // this.sprite.anims.play('idle', true)
-
-    this.playerAnimations();
-
-
-    // Track the keys
-
-    this.cursors = this.scene.input.keyboard.createCursorKeys();
-
-    this.scene.events.on("update", this.update, this);
-
-
   }
 
 
-  playerAnimations(){
+  initPlayerAnimations(){
     //  Our player animations
     // player.setFrame(0);
     var playerIdleFramenames = this.scene.anims.generateFrameNames('player', {
@@ -128,6 +119,7 @@ export default class Player {
   }
 
 
+
   onSensorCollide({
     bodyA,
     bodyB,
@@ -144,6 +136,8 @@ export default class Player {
       this.isTouching.ground = true;
     }
   }
+
+
 
   resetTouching() {
     this.isTouching.left = false;
@@ -176,9 +170,6 @@ export default class Player {
     }
 
 
-    // if (this.isTouching.left == true) {console.log("isTouching.left == true")};
-    // if (this.isTouching.right == true) {console.log("isTouching.right == true")};
-    // if (this.isTouching.ground == true) {console.log("isTouching.ground == true")};
 
     // Limit horizontal speed, without this the player's velocity would just keep increasing to
     // absurd speeds. We don't want to touch the vertical velocity though, so that we don't
