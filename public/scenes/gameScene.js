@@ -81,6 +81,7 @@ export default class GameScene extends Phaser.Scene {
 
     //foreground behind actor layer (trees decor)
     const behindActorLayer = map.createDynamicLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
+    const foregroundDecorLayer = map.createDynamicLayer('Foreground_Decor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
     const platform = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
@@ -96,24 +97,17 @@ export default class GameScene extends Phaser.Scene {
     //    Find every object from collision object layer
     //
     const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {
-      console.log(platformObject);
-      // debugger;
-      ;
     });
-
-    console.log(this.matter.world);
 
     const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
     // console.log(collisionPlatformLayer)
 
     // Set colliding tiles before converting the layer to Matter bodies
-    // platformCollisionLayer.setCollisionByExclusion(-1)
     platform.setCollisionByExclusion(-1)
-    behindActorLayer.setCollisionByExclusion(-1)
     frontOverlayLayer.setCollisionByExclusion(-1)
+    // platformCollisionLayer.setCollisionByExclusion(-1)
+    // behindActorLayer.setCollisionByExclusion(-1)
     // platform.setCollisionByProperty({ collides: true });
-    // behindActorLayer.setCollisionByProperty({ collides: true });
-    // frontOverlayLayer.setCollisionByProperty({ collides: true });
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(platform);
@@ -121,9 +115,6 @@ export default class GameScene extends Phaser.Scene {
     this.matter.world.convertTilemapLayer(behindActorLayer);
     // this.matter.world.add(platform)
 
-    // set the boundaries of our game world
-    // this.physics.world.bounds.width = platform.width;
-    // this.physics.world.bounds.height = platform.height;
 
 
 //
@@ -154,8 +145,33 @@ export default class GameScene extends Phaser.Scene {
       //debugger;
     }
 
-    this.matter.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
+
+    //
+    //  Configure WORLD CAMERA etc. Game and camera bounds
+    //
+
+    this.matter.world.setBounds(0, 0, platform.width, platform.height + 30);
+    this.cameras.main.setBounds(0, 0, platform.width, platform.height);
+
+    // Smoothly follow the player
+    this.cameras.main.startFollow(this.player.sprite, true, 0.5, 0.5);
+
+
+    //zoom camera onto player after the game starts
+    this.scene.scene.time.addEvent({
+      delay: 200,
+      callback: () => (this.gameStartZoom())
+    });
+
   } // End of create
+
+
+  gameStartZoom(){
+    console.log("zooming onto player");
+    this.cameras.main.zoomTo(2, 3000);
+
+
+  }
 
 
 
@@ -165,7 +181,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    console.log("gameScene update");
+    // console.log("gameScene update");
     //
     // if (gameOver) {
     //   return;
