@@ -4,6 +4,11 @@ export default class Player {
 
     // Create the physics-based sprite that we will move around and animate
     this.sprite = scene.matter.add.sprite(0, 0, "player", 0);
+
+    const canJump = false;
+    const jumpCooldownTimer = null;
+
+
     const {
       Body,
       Bodies
@@ -21,7 +26,7 @@ export default class Player {
       }
     });
     this.sensors = {
-      top: Bodies.rectangle(0, -h * 0.5, w * 0.75, 2, {
+      top: Bodies.rectangle(0, -h * 0.5, w * 0.5, 2, {
         isSensor: true
       }),
       left: Bodies.rectangle(-w * 0.4, 0, 2, h * 0.75, {
@@ -30,7 +35,7 @@ export default class Player {
       right: Bodies.rectangle(w * 0.4, 0, 2, h * 0.75, {
         isSensor: true
       }),
-      bottom: Bodies.rectangle(0, h * 0.5, w * 0.75, 2, {
+      bottom: Bodies.rectangle(0, h * 0.5, w * 0.25, 2, {
         isSensor: true
       })
     };
@@ -48,7 +53,7 @@ export default class Player {
       .setPosition(x, y);
 
 
-
+      this.canJump = true;
 
     //create and track player collisions
     this.initCollisionTracking();
@@ -67,6 +72,10 @@ export default class Player {
 
     this.scene.events.on("update", this.update, this);
 
+    this.destroyed = false;
+    this.scene.events.on("update", this.update, this);
+    this.scene.events.once("shutdown", this.destroy, this);
+    this.scene.events.once("destroy", this.destroy, this)
 
   } //end of create()
 
@@ -80,8 +89,8 @@ export default class Player {
     };
 
     // Jumping is going to have a cooldown
-    this.canJump = false;
-    this.jumpCooldownTimer = null;
+     // this.canJump = false;
+     // this.jumpCooldownTimer = null;
 
 
     this.scene.matterCollision.addOnCollideStart({
@@ -151,45 +160,45 @@ export default class Player {
 
 
   update() {
+    if (this.destroyed) return;
+
     const sprite = this.sprite;
     const velocity = sprite.body.velocity;
-// debugger;
+    const isOnGround = this.isTouching.ground;
+    const isInAir = !isOnGround;
+
     if (this.destroyed) return;
     // debugger;
     // --- Move the player horizontally ---
     if (this.cursors.left.isDown) // if the left arrow key is down
     {
-      console.log("left key")
       this.sprite.setVelocityX(-2); // move left
     } else if (this.cursors.right.isDown) // if the right arrow key is down
     {
       this.sprite.setVelocityX(2); // move right
     }
-    if ((this.cursors.space.isDown || this.cursors.up.isDown) && this.sprite.body.onFloor()) {
-      this.sprite.body.setVelocityY(-500); // jump up
+    if ((this.cursors.space.isDown || this.cursors.up.isDown) && isOnGround) {
+      this.sprite.setVelocityY(-5); // jump up
     }
 
 
-
-    // Limit horizontal speed, without this the player's velocity would just keep increasing to
-    // absurd speeds. We don't want to touch the vertical velocity though, so that we don't
-    // interfere with gravity.
+    // Limit horizontal speed increases
     if (velocity.x > 7) sprite.setVelocityX(7);
     else if (velocity.x < -7) sprite.setVelocityX(-7);
 
-    // --- Move the player vertically ---
-    //
-    // if (isJumpKeyDown && this.canJump && isOnGround) {
-    //   sprite.setVelocityY(-11);
-    //
-    //   // Add a slight delay between jumps since the bottom sensor will still collide for a few
-    //   // frames after a jump is initiated
-    //   this.canJump = false;
-    //   this.jumpCooldownTimer = this.scene.time.addEvent({
-    //     delay: 250,
-    //     callback: () => (this.canJump = true)
-    //   });
-    // }
+    if (this.cursors.up.isDown && this.canJump && isOnGround) {
+      sprite.setVelocityY(-5);
+
+      // Add a slight delay between jumps since the bottom sensor will still collide for a few
+      // frames after a jump is initiated
+      this.canJump = false;
+      this.jumpCooldownTimer = this.scene.time.addEvent({
+        delay: 2000,
+        callback: () => (this.canJump = true)
+      });
+    }
+
+
 
     // Update the animation/texture based on the state of the player's state
     //   if (isOnGround) {
@@ -201,6 +210,23 @@ export default class Player {
     //   }
   }
 
-  destroy() {}
+
+  destroy() {
+    // Clean up any listeners that might trigger events after the player is officially destroyed
+    this.scene.events.off("update", this.update, this);
+    this.scene.events.off("shutdown", this.destroy, this);
+    this.scene.events.off("destroy", this.destroy, this);
+    if (this.scene.matter.world) {
+      this.scene.matter.world.off("beforeupdate", this.resetTouching, this);
+    }
+    const sensors = [this.sensors.bottom, this.sensors.left, this.sensors.right];
+    this.scene.matterCollision.removeOnCollideStart({ objectA: sensors });
+    this.scene.matterCollision.removeOnCollideActive({ objectA: sensors });
+    if (this.jumpCooldownTimer) this.jumpCooldownTimer.destroy();
+
+    this.destroyed = true;
+    this.sprite.destroy();
+
+  }
 
 }
