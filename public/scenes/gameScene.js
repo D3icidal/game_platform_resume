@@ -81,6 +81,7 @@ export default class GameScene extends Phaser.Scene {
 
     //foreground behind actor layer (trees decor)
     const behindActorLayer = map.createDynamicLayer('Foreground_BehindActor_Layer', playformMysticCliffsTileset, 0, 0);
+    const foregroundDecorLayer = map.createDynamicLayer('Foreground_Decor_Layer', playformMysticCliffsTileset, 0, 0);
 
     //main platform game layer
     const platform = map.createDynamicLayer('MainPlatform_Layer', playformMysticCliffsTileset, 0, 0);
@@ -150,6 +151,10 @@ export default class GameScene extends Phaser.Scene {
     }
 
     this.matter.world.setBounds(0, 0, this.game.config.width, this.game.config.height);
+    this.cameras.main.setBounds(0, 0, this.game.config.width, this.game.config.height);
+
+    // Smoothly follow the player
+    this.cameras.main.startFollow(this.player.sprite, false, 0.5, 0.5);
   } // End of create
 
 
