@@ -13,7 +13,7 @@ export default {
     matter: {
       gravity: {
         y: .5,
-        x: 0
+        x: .1
       },
       debug: {
         showBody: true,

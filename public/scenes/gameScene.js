@@ -160,7 +160,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
-    console.log("gameScene update");
+    // console.log("gameScene update");
     //
     // if (gameOver) {
     //   return;

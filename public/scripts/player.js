@@ -53,7 +53,7 @@ export default class Player {
       .setPosition(x, y);
 
 
-      this.canJump = true;
+    this.canJump = true;
 
     //create and track player collisions
     this.initCollisionTracking();
@@ -80,7 +80,7 @@ export default class Player {
   } //end of create()
 
 
-  initCollisionTracking(){
+  initCollisionTracking() {
     // Track which sensors are touching something
     this.isTouching = {
       left: false,
@@ -89,8 +89,8 @@ export default class Player {
     };
 
     // Jumping is going to have a cooldown
-     // this.canJump = false;
-     // this.jumpCooldownTimer = null;
+    // this.canJump = false;
+    // this.jumpCooldownTimer = null;
 
 
     this.scene.matterCollision.addOnCollideStart({
@@ -106,9 +106,10 @@ export default class Player {
   }
 
 
-  initPlayerAnimations(){
+  initPlayerAnimations() {
     //  Our player animations
-    // player.setFrame(0);
+
+    //  IDLE
     var playerIdleFramenames = this.scene.anims.generateFrameNames('player', {
       start: 0,
       end: 3,
@@ -117,7 +118,6 @@ export default class Player {
       // suffix: '.png'
     });
 
-
     this.scene.anims.create({
       key: 'idle',
       frames: playerIdleFramenames,
@@ -125,6 +125,44 @@ export default class Player {
       repeat: -1
     });
     this.sprite.anims.play('idle', true)
+
+
+
+    //  RUN
+    var playerRunFrameNames = this.scene.anims.generateFrameNames('player', {
+      start: 0,
+      end: 5,
+      zeroPad: 2,
+      prefix: 'adventurer-run-',
+      // suffix: '.png'
+    });
+
+    this.scene.anims.create({
+      key: 'run',
+      frames: playerRunFrameNames,
+      frameRate: 5,
+      repeat: -1
+    });
+    this.sprite.anims.play('run', true)
+
+
+    //  JUMP
+    var playerJumpFrameNames = this.scene.anims.generateFrameNames('player', {
+      start: 0,
+      end: 3,
+      zeroPad: 2,
+      yoyo: true,
+      prefix: 'adventurer-jump-',
+      // suffix: '.png'
+    });
+
+    this.scene.anims.create({
+      key: 'jump',
+      frames: playerJumpFrameNames,
+      frameRate: 5,
+      repeat: 0
+    });
+    this.sprite.anims.play('jump', true)
   }
 
 
@@ -172,9 +210,11 @@ export default class Player {
     // --- Move the player horizontally ---
     if (this.cursors.left.isDown) // if the left arrow key is down
     {
+      this.sprite.setFlipX(true);
       this.sprite.setVelocityX(-2); // move left
     } else if (this.cursors.right.isDown) // if the right arrow key is down
     {
+      this.sprite.setFlipX(false);
       this.sprite.setVelocityX(2); // move right
     }
     if ((this.cursors.space.isDown || this.cursors.up.isDown) && isOnGround) {
@@ -188,7 +228,8 @@ export default class Player {
 
     if (this.cursors.up.isDown && this.canJump && isOnGround) {
       sprite.setVelocityY(-5);
-
+      console.log("play jump anime")
+      sprite.anims.play("jump", true)
       // Add a slight delay between jumps since the bottom sensor will still collide for a few
       // frames after a jump is initiated
       this.canJump = false;
@@ -199,16 +240,22 @@ export default class Player {
     }
 
 
-
     // Update the animation/texture based on the state of the player's state
-    //   if (isOnGround) {
-    //     if (sprite.body.force.x !== 0) sprite.anims.play("player-run", true);
-    //     else sprite.anims.play("player-idle", true);
-    //   } else {
-    //     sprite.anims.stop();
-    //     sprite.setTexture("player", 10);
-    //   }
-  }
+    if (isOnGround) {
+      if (sprite.body.velocity.x !== 0) {
+        console.log("play run anime")
+        sprite.anims.play("run", true)
+      } else {
+        console.log("play idle anime")
+        sprite.anims.play("idle", true)
+      }
+    } else {
+    }
+
+    // debugger
+
+
+  } //END OF UPDATE()
 
 
   destroy() {
@@ -220,8 +267,12 @@ export default class Player {
       this.scene.matter.world.off("beforeupdate", this.resetTouching, this);
     }
     const sensors = [this.sensors.bottom, this.sensors.left, this.sensors.right];
-    this.scene.matterCollision.removeOnCollideStart({ objectA: sensors });
-    this.scene.matterCollision.removeOnCollideActive({ objectA: sensors });
+    this.scene.matterCollision.removeOnCollideStart({
+      objectA: sensors
+    });
+    this.scene.matterCollision.removeOnCollideActive({
+      objectA: sensors
+    });
     if (this.jumpCooldownTimer) this.jumpCooldownTimer.destroy();
 
     this.destroyed = true;
