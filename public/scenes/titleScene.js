@@ -21,8 +21,10 @@ export default class TitleScene extends Phaser.Scene {
 
 
     //    Audio
-    const titleMusic = this.sound.add('titleTheme');
+    this.sound.pauseOnBlur = false;
+    const titleMusic = this.sound.add('titleTheme',{ loop: true });
     titleMusic.play();
+
 
 
     // debugger;
@@ -62,23 +64,28 @@ export default class TitleScene extends Phaser.Scene {
       useHandCursor: true
     });
 
-    if (config.debug == true) {
-      this.timedEvent = this.time.delayedCall(3000, this.titleExit, [], this);
-    }
+    // if (config.debug == true) {
+    //   this.timedEvent = this.time.delayedCall(3000, this.titleExit, [], this);
+    // }
 
-    titleText.on('pointerdown', () => this.clickButton());
+    titleText.on('pointerdown', () => this.titleExit(titleMusic));
   } // END OF CREATE()
 
 
-  titleExit() {
-    var titleExitTween = this.tweens.add({
-        targets:  this.titleMusic,
-        setVolume:   0,
-        duration: 200
-    });
+  titleExit(titleMusic) {
+    // var titleExitTween = this.tweens.add({
     debugger
-    titleExitTween.setCallback("onComplete", this.clickButton,[],this);
-    titleExitTween.play();
+    this.tweens.add({
+        targets:  titleMusic.manager,
+        volume:   0,
+        // setVolume: 0,
+        ease: 'Linear',
+        duration: 3000,
+        onComplete: this.clickButton.bind(this) //need .bind to keep scope
+    });
+    // debugger
+    // titleExitTween.setCallback("onComplete", this.clickButton,[],this);
+    // titleExitTween.play();
   }
 
   clickButton() {
