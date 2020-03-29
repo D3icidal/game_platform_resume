@@ -29,7 +29,10 @@ export default {
         mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
       }
     ]
-  }
+  },
+  audio: {
+        disableWebAudio: true
+    }
 };
 
 
