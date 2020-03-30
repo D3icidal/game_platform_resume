@@ -95,7 +95,7 @@ export default class PreloadScene extends Phaser.Scene {
 
 
     // debugger
-    let finishedLoadingText = this.add.text(config.centerX, 75, "Touch Anywhere To Begin", titleTextStyle).setOrigin(0.5);
+    let finishedLoadingText = this.add.text(config.centerX, 75, "Are You Ready To Begin?", titleTextStyle).setOrigin(0.5);
 
     finishedLoadingText.alpha = 0
 
@@ -107,9 +107,11 @@ export default class PreloadScene extends Phaser.Scene {
         // onComplete: this.clickButton.bind(this) //need .bind to keep scope
     });
 
-    this.input.on('pointerdown', () => this.scene.switch('titleScene'));
+    this.input.on('pointermove', () => this.scene.switch('titleScene'));
 
   } //complete()
+
+  
 
 
 }
