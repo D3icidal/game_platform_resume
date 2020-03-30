@@ -53,13 +53,13 @@ export default class TitleScene extends Phaser.Scene {
     // this.scene.scene.background = this.add.sprite(tavernTitle);
 
 
-    var titleTextStyle = {
+    let titleTextStyle = {
       font: "32px MedievalSharp",
       fill: "#fff",
       boundsAlignH: "center",
       boundsAlignV: "middle"
     };
-    var titleText = this.add.text(config.width / 2, 100, 'The Hiring Of Thomas', titleTextStyle).setOrigin(0.5);
+    let titleText = this.add.text(config.centerX, 75, 'The Hiring Of Thomas', titleTextStyle).setOrigin(0.5);
     titleText.setInteractive({
       useHandCursor: true
     });
@@ -74,7 +74,6 @@ export default class TitleScene extends Phaser.Scene {
 
   titleExit(titleMusic) {
     // var titleExitTween = this.tweens.add({
-    debugger
     this.tweens.add({
         targets:  titleMusic.manager,
         volume:   0,

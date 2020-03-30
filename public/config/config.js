@@ -5,6 +5,8 @@ export default {
   // parent: ‘platform-resume',
   width: 800,
   height: 600,
+  centerX: 400,
+  centerY: 300,
   // parent: "game-container",
   pixelArt: true,
   debug: true, //My own debugging features, not phasers
