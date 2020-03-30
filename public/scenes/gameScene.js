@@ -64,13 +64,13 @@ export default class GameScene extends Phaser.Scene {
     //
     //    Find every object from collision object layer
     //
-    const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {});
+    const platformCollisionObjects = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {});
 
     const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
-    // console.log(collisionPlatformLayer)
+    debugger
 
     // Set colliding tiles before converting the layer to Matter bodies
-    platform.setCollisionByExclusion(-1)
+    // platform.setCollisionByExclusion(-1)
     frontOverlayLayer.setCollisionByExclusion(-1)
     // platformCollisionLayer.setCollisionByExclusion(-1)
     // behindActorLayer.setCollisionByExclusion(-1)

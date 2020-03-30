@@ -9,7 +9,7 @@ export default {
   centerY: 300,
   // parent: "game-container",
   pixelArt: true,
-  // debug: true, //My own debugging features, not phasers
+  debug: true, //My own debugging features, not phasers
   physics: {
     default: 'matter',
     matter: {
@@ -17,10 +17,10 @@ export default {
         y: .4,
         x: 0
       },
-      // debug: {
-      //   showBody: true,
-      //   showStaticBody: true
-      // }
+      debug: {
+        showBody: true,
+        showStaticBody: true
+      }
     }
   },
   plugins: {
