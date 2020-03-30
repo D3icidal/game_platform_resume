@@ -64,6 +64,7 @@ export default class GameScene extends Phaser.Scene {
     //
     //    Find every object from collision object layer
     //
+    debugger
     const platformCollisionObjects = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {});
 
     const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
