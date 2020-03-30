@@ -5,30 +5,33 @@ export default {
   // parent: ‘platform-resume',
   width: 800,
   height: 600,
+  centerX: 400,
+  centerY: 300,
   // parent: "game-container",
   pixelArt: true,
-  debug: true, //My own debugging features, not phasers
+  // debug: true, //My own debugging features, not phasers
   physics: {
     default: 'matter',
     matter: {
       gravity: {
-        y: .5,
+        y: .4,
         x: 0
       },
-      debug: {
-        showBody: true,
-        showStaticBody: true
-      }
+      // debug: {
+      //   showBody: true,
+      //   showStaticBody: true
+      // }
     }
   },
   plugins: {
-    scene: [
-      {
-        plugin: PhaserMatterCollisionPlugin, // The plugin class
-        key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
-        mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
-      }
-    ]
+    scene: [{
+      plugin: PhaserMatterCollisionPlugin, // The plugin class
+      key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
+      mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
+    }]
+  },
+  audio: {
+    disableWebAudio: true
   }
 };
 

@@ -1,0 +1,259 @@
+{
+	"frames": [
+		{
+			"filename": "frame_00_delay-0.15s-00.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 642,
+				"y": 316
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-01.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 1284,
+				"y": 0
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-02.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 642,
+				"y": 948
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s.-03gif.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 316
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-04.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 1284,
+				"y": 316
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-05.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 632
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-06.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-07.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 1284,
+				"y": 948
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-08.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 1284,
+				"y": 632
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-09.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 642,
+				"y": 0
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-10.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 642,
+				"y": 632
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		},
+		{
+			"filename": "frame_00_delay-0.15s-11.gif",
+			"frame": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 948
+			},
+			"spriteSourceSize": {
+				"h": 314,
+				"w": 640,
+				"x": 0,
+				"y": 0
+			},
+			"sourceSize": {
+				"h": 314,
+				"w": 640
+			},
+			"trimmed": false,
+			"rotated": false
+		}
+	],
+	"meta": {
+		"image": "tavernScreen.png"
+	}
+}
