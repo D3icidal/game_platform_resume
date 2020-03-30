@@ -32,7 +32,6 @@ export default class PreloadScene extends Phaser.Scene {
     }).setOrigin(.5);
 
 
-
     // Loading and complete functions
     this.load.on('progress', this.updateBar, {
       newGraphics: this.newGraphics,
@@ -51,10 +50,9 @@ export default class PreloadScene extends Phaser.Scene {
     }
 
 
-    this.load.audio('titleTheme', [
-      // '../assets/audio/ElvenForest.mp3'
-      '../assets/audio/ElvenForest_Short.ogg'
-    ]);
+    this.load.audio('titleTheme','../assets/audio/ElvenForest_Short.ogg');
+
+    this.load.audio('gameMusic', '../assets/audio/Our-Mountain_v003_Looping.mp3');
 
 
     // this.load.image('background', 'assets/background.jpg');

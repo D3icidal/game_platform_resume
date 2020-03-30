@@ -19,7 +19,7 @@ export default class TitleScene extends Phaser.Scene {
 
 
     //    Audio
-    // this.sound.pauseOnBlur = false;
+    this.sound.pauseOnBlur = true;
     const titleMusic = this.sound.add('titleTheme', {
       loop: true,
       volume: .5,
@@ -77,15 +77,16 @@ export default class TitleScene extends Phaser.Scene {
       volume: 0,
       // setVolume: 0,
       ease: 'Linear',
-      duration: 3000,
-      onComplete: this.clickButton.bind(this) //need .bind to keep scope
+      duration: 2000,
+      onComplete: this.clickButton(titleMusic).bind(this) //need .bind to keep scope
     });
     // debugger
     // titleExitTween.setCallback("onComplete", this.clickButton,[],this);
     // titleExitTween.play();
   }
 
-  clickButton() {
+  clickButton(titleMusic) {
+    titleMusic.stop()
     this.scene.switch('gameScene')
   }
 
