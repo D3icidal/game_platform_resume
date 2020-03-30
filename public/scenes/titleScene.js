@@ -10,9 +10,7 @@ export default class TitleScene extends Phaser.Scene {
 
   preload() {
     console.log("titleScene preload")
-    this.load.audio('titleTheme', [
-      '../assets/audio/ElvenForest.mp3'
-    ]);
+
 
   } //end of preloader
 
@@ -21,13 +19,13 @@ export default class TitleScene extends Phaser.Scene {
 
 
     //    Audio
-    this.sound.pauseOnBlur = false;
-    const titleMusic = this.sound.add('titleTheme',{ loop: true });
+    // this.sound.pauseOnBlur = false;
+    const titleMusic = this.sound.add('titleTheme', {
+      loop: true,
+      volume: .5,
+    });
     titleMusic.play();
 
-
-
-    // debugger;
     //Background
 
     const tavernAnims = this.anims.create({
@@ -46,7 +44,7 @@ export default class TitleScene extends Phaser.Scene {
 
 
     // this.background = this.add.sprite(config.width/2, config.height/2, 'tavern').play('tavernTitle');
-    this.background = this.add.sprite(config.width / 2, config.height / 2, 'tavern').play('tavernTitle');
+    this.background = this.add.sprite(config.centerX, config.centerY, 'tavern').play('tavernTitle');
     // debugger
 
     // this.scene.scene.background = this.add.sprite(config.width/2, config.height/2, 'tavern').play('tavernTitle');
@@ -75,12 +73,12 @@ export default class TitleScene extends Phaser.Scene {
   titleExit(titleMusic) {
     // var titleExitTween = this.tweens.add({
     this.tweens.add({
-        targets:  titleMusic.manager,
-        volume:   0,
-        // setVolume: 0,
-        ease: 'Linear',
-        duration: 3000,
-        onComplete: this.clickButton.bind(this) //need .bind to keep scope
+      targets: titleMusic.manager,
+      volume: 0,
+      // setVolume: 0,
+      ease: 'Linear',
+      duration: 3000,
+      onComplete: this.clickButton.bind(this) //need .bind to keep scope
     });
     // debugger
     // titleExitTween.setCallback("onComplete", this.clickButton,[],this);

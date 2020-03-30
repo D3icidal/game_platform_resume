@@ -7,26 +7,7 @@ export default class GameScene extends Phaser.Scene {
     super({
       key: 'gameScene'
     });
-    // var platform = this.platform;
-    // var stars = this.stars
-    // var player = this.player;
-    // var cursors = this.cursors;
-    // var bombs = this.bombs;
-    // var scoreText = this.scoreText;
-    // var collectStar = this.collectStar;
-    // var hitBomb = this.hitBomb;
-    // var gameOver = this.gameOver;
 
-
-    // var platform;
-    // var stars;
-    // var player;
-    // var cursors;
-    // var bombs;
-    // var scoreText;
-    // var collectStar;
-    // var hitBomb;
-    // var gameOver;
   }
   // var player;
 
@@ -37,19 +18,6 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     console.log("gamescene preload")
     // load images
-
-
-    this.load.image('cliffsTilesetImage', '../assets/tilesets/platform/tileset.png');
-    this.load.image('sky', '../assets/tilesets/platform/sky.png');
-    this.load.image('clouds', '../assets/tilesets/platform/clouds.png');
-    this.load.image('sea', '../assets/tilesets/platform/sea.png');
-    this.load.image('island', '../assets/tilesets/platform/far-grounds.png');
-
-    this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
-
-    // this.load.image('player', '../assets/tilesets/actors/adventure.png');
-    // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
-    this.load.atlas('player', '../assets/tilesets/actors/adventurer_sprite.png', '../assets/tilesets/actors/adventurer_sprite.json');
   }
 
 
@@ -96,8 +64,7 @@ export default class GameScene extends Phaser.Scene {
     //
     //    Find every object from collision object layer
     //
-    const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {
-    });
+    const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {});
 
     const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
     // console.log(collisionPlatformLayer)
@@ -117,10 +84,13 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-//
-//     PLAYER
-//
-    const { x, y } = map.findObject("Actor", obj => obj.name === "spawn");
+    //
+    //     PLAYER
+    //
+    const {
+      x,
+      y
+    } = map.findObject("Actor", obj => obj.name === "spawn");
 
     this.player = new Player(this, x, y);
 
@@ -166,16 +136,15 @@ export default class GameScene extends Phaser.Scene {
   } // End of create
 
 
-  gameStartZoom(){
+  gameStartZoom() {
     console.log("zooming onto player");
     this.cameras.main.zoomTo(2, 3000);
-
 
   }
 
 
 
-  addObjectToLayer(platformObject){
+  addObjectToLayer(platformObject) {
     // this.matter.world.add(platformObject);
   }
 
