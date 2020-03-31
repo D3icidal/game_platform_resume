@@ -123,6 +123,25 @@ export default class GameScene extends Phaser.Scene {
 
     this.player = new Player(this, x, y);
 
+    this.unsubscribePlayerCollide = this.matterCollision.addOnCollideStart({
+      objectA: this.player.sprite,
+      callback: this.onPlayerCollide,
+      context: this
+    });
+
+
+    const { bottom, left, top, right } = this.matter.world.walls;
+        this.matterCollision.addOnCollideStart({
+            objectA: [bottom, left, right, top], //world bounds
+            objectB: this.gate, // some object to detect collision with
+            callback: eventData => {
+                // run logic here
+                console.log(eventData)
+            },
+        });
+
+
+
     // this.cameras.main.setBackgroundColor('#ccccff');
 
     //  The score
@@ -157,10 +176,11 @@ export default class GameScene extends Phaser.Scene {
     //
     //  Configure WORLD CAMERA etc. Game and camera bounds
     //
-
-    this.matter.world.setBounds(0, 0, platform.width, platform.height + 30);
+    // debugger
+    this.matter.world.walls.bottom = 200
+    this.matter.world.setBounds(0, 0, platform.width, platform.height + 20);
     this.cameras.main.setBounds(0, 0, platform.width, platform.height);
-
+debugger
     // Smoothly follow the player
     this.cameras.main.startFollow(this.player.sprite, true, 0.5, 0.5);
 
@@ -182,8 +202,22 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-  addObjectToLayer(platformObject) {
-    // this.matter.world.add(platformObject);
+  onPlayerCollide({ gameObjectB }) {
+    if (!gameObjectB || !(gameObjectB instanceof Phaser.Tilemaps.Tile)) return;
+
+    const tile = gameObjectB;
+
+    // Check the tile property set in Tiled (you could also just check the index if you aren't using
+    // Tiled in your game)
+    if (tile.properties.isLethal) {
+      // Unsubscribe from collision events so that this logic is run only once
+      this.unsubscribePlayerCollide();
+
+      this.player.freeze();
+      const cam = this.cameras.main;
+      cam.fade(250, 0, 0, 0);
+      cam.once("camerafadeoutcomplete", () => this.scene.restart());
+    }
   }
 
 

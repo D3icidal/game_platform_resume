@@ -175,10 +175,10 @@ export default class Player {
     if (bodyB.isSensor) return; // We only care about collisions with physical objects
     if (bodyA === this.sensors.left) {
       this.isTouching.left = true;
-      if (pair.separation > 0.5) this.sprite.x += pair.separation - 0.5;
+      if (pair.separation > 0.5) this.sprite.x += pair.separation + 2;
     } else if (bodyA === this.sensors.right) {
       this.isTouching.right = true;
-      if (pair.separation > 0.5) this.sprite.x -= pair.separation - 0.5;
+      if (pair.separation > 0.5) this.sprite.x -= pair.separation + 2;
     } else if (bodyA === this.sensors.bottom) {
       this.isTouching.ground = true;
     }
@@ -256,6 +256,11 @@ export default class Player {
 
 
   } //END OF UPDATE()
+
+
+  freeze() {
+    this.sprite.setStatic(true);
+  }
 
 
   destroy() {
