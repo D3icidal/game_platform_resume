@@ -61,16 +61,43 @@ export default class GameScene extends Phaser.Scene {
     // // debugger;
 
 
+
+
+
+
     //
     //    Find every object from collision object layer
     //
-    const thingy = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {});
+    // const platformCollisionObjects = map.getObjectLayer("Platform_Collision_Layer").objects.forEach(platformObject => {
+    // var platformCollisionObjects = map.getObjectLayer("Platform_Collision_Layer").objects.map(platformObject => {
+    //   // debugger
+    //   return platformObject
+    // });
 
-    const collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
-    // console.log(collisionPlatformLayer)
+
+ // Phaser.Physics.Matter.Matter.Bodies
+
+
+    var collisionPlatformLayer = map.getObjectLayer("Platform_Collision_Layer")
+    // debugger
+    // const collisionSprites = map.createFromObjects('Platform_Collision_Layer', '', { key: 'floors' });
+    // this.physics.add.sprite(collisionSprites)
+
+  //   collisionPlatformLayer.objects.forEach(function(colObj) {
+  //   console.log(colObj)
+  //   debugger
+  // }, this);
+  // var coll1 = collisionPlatformLayer.objects[0]
+  //   debugger
+
+// player = this.physics.add.sprite(map.createFromObjects('npcs', 'player', {key: 'playerSheet'}));
+
+
+
 
     // Set colliding tiles before converting the layer to Matter bodies
     platform.setCollisionByExclusion(-1)
+    // collisionPlatformLayer.setCollisionByExclusion(-1)
     frontOverlayLayer.setCollisionByExclusion(-1)
     // platformCollisionLayer.setCollisionByExclusion(-1)
     // behindActorLayer.setCollisionByExclusion(-1)
@@ -78,9 +105,10 @@ export default class GameScene extends Phaser.Scene {
 
     // Get the layers registered with Matter. Any colliding tiles will be given a Matter body. We haven't mapped out custom collision shapes in Tiled so each colliding tile will get a default rectangle body (similar to AP).
     this.matter.world.convertTilemapLayer(platform);
+    // this.matter.world.convertTilemapLayer(collisionPlatformLayer);
     this.matter.world.convertTilemapLayer(frontOverlayLayer);
     this.matter.world.convertTilemapLayer(behindActorLayer);
-    // this.matter.world.add(platform)
+    this.matter.world.add(collisionPlatformLayer)
 
 
 
@@ -94,6 +122,25 @@ export default class GameScene extends Phaser.Scene {
     } = map.findObject("Actor", obj => obj.name === "spawn");
 
     this.player = new Player(this, x, y);
+
+    this.unsubscribePlayerCollide = this.matterCollision.addOnCollideStart({
+      objectA: this.player.sprite,
+      callback: this.onPlayerCollide,
+      context: this
+    });
+
+
+    const { bottom, left, top, right } = this.matter.world.walls;
+        this.matterCollision.addOnCollideStart({
+            objectA: [bottom, left, right, top], //world bounds
+            objectB: this.gate, // some object to detect collision with
+            callback: eventData => {
+                // run logic here
+                console.log(eventData)
+            },
+        });
+
+
 
     // this.cameras.main.setBackgroundColor('#ccccff');
 
@@ -129,10 +176,11 @@ export default class GameScene extends Phaser.Scene {
     //
     //  Configure WORLD CAMERA etc. Game and camera bounds
     //
-
-    this.matter.world.setBounds(0, 0, platform.width, platform.height + 30);
+    // debugger
+    this.matter.world.walls.bottom = 200
+    this.matter.world.setBounds(0, 0, platform.width, platform.height + 20);
     this.cameras.main.setBounds(0, 0, platform.width, platform.height);
-
+debugger
     // Smoothly follow the player
     this.cameras.main.startFollow(this.player.sprite, true, 0.5, 0.5);
 
@@ -154,8 +202,22 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-  addObjectToLayer(platformObject) {
-    // this.matter.world.add(platformObject);
+  onPlayerCollide({ gameObjectB }) {
+    if (!gameObjectB || !(gameObjectB instanceof Phaser.Tilemaps.Tile)) return;
+
+    const tile = gameObjectB;
+
+    // Check the tile property set in Tiled (you could also just check the index if you aren't using
+    // Tiled in your game)
+    if (tile.properties.isLethal) {
+      // Unsubscribe from collision events so that this logic is run only once
+      this.unsubscribePlayerCollide();
+
+      this.player.freeze();
+      const cam = this.cameras.main;
+      cam.fade(250, 0, 0, 0);
+      cam.once("camerafadeoutcomplete", () => this.scene.restart());
+    }
   }
 
 

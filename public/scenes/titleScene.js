@@ -62,9 +62,9 @@ export default class TitleScene extends Phaser.Scene {
       useHandCursor: true
     });
 
-    // if (config.debug == true) {
-    //   this.timedEvent = this.time.delayedCall(3000, this.titleExit, [], this);
-    // }
+    if (config.debug == true) {
+      this.timedEvent = this.time.delayedCall(2000, this.titleExit, [titleMusic], this);
+    }
 
     titleText.on('pointerdown', () => this.titleExit(titleMusic));
   } // END OF CREATE()
@@ -78,7 +78,7 @@ export default class TitleScene extends Phaser.Scene {
       // setVolume: 0,
       ease: 'Linear',
       duration: 2000,
-      onComplete: this.clickButton(titleMusic).bind(this) //need .bind to keep scope
+      onComplete: this.clickButton(titleMusic) //need .bind to keep scope
     });
     // debugger
     // titleExitTween.setCallback("onComplete", this.clickButton,[],this);

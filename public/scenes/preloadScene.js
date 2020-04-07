@@ -10,9 +10,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    if (config.debug == true) {
-      console.log("\n\n\t\tThomas's DEBUG MODE ENABLED in config.js\n\n\n");
-    }
 
     //PRELOADER gfx
     this.graphics = this.add.graphics();
@@ -55,8 +52,6 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.audio('gameMusic', '../assets/audio/Our-Mountain_v003_Looping.mp3');
 
 
-    // this.load.image('background', 'assets/background.jpg');
-
     this.load.spritesheet('dude', 'assets/dude.png', {
       frameWidth: 32,
       frameHeight: 48
@@ -70,12 +65,9 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.load.tilemapTiledJSON('tiledTilemap', '../assets/tilesets/platform/resumePlatformerV2.json');
 
-    // this.load.image('player', '../assets/tilesets/actors/adventure.png');
-    // this.load.multiatlas('player', '../assets/tilesets/actors/adventure.json', '../assets/tilesets/actors');
     this.load.atlas('player', '../assets/tilesets/actors/adventurer_sprite.png', '../assets/tilesets/actors/adventurer_sprite.json');
 
     this.load.atlas('tavern', '../assets/tilesets/screens/tavernScreen.png', '../assets/tilesets/screens/tavernScreen.json');
-
     this.load.image('tavernTitle', '../assets/tilesets/screens/tavernScreen.png');
 
 
@@ -123,9 +115,18 @@ export default class PreloadScene extends Phaser.Scene {
       // onComplete: this.clickButton.bind(this) //need .bind to keep scope
     });
 
-    this.input.on('pointermove', () => this.scene.switch('titleScene'));
-
+    if (config.debug == true) {
+      console.log("debug on")
+      this.timedEvent = this.time.delayedCall(1000, this.preloadExit, [this],this);
+    }
+    // this.input.on('pointermove', this.preloadExit());
   } //complete()
+
+
+  preloadExit(thisScene){
+    console.log("debug on")
+    thisScene.scene.switch('titleScene')
+  }
 
 
 
