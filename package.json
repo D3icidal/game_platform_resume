@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "phaser": "^3.22.0",
+    "phaser": "^3.55.2",
     "phaser-matter-collision-plugin": "^0.10.2",
     "socket.io": "^2.3.0"
   }
